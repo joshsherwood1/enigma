@@ -32,12 +32,4 @@ class KeyTest < Minitest::Test
     assert_equal "56789", @key_1.determine_the_key_to_use
     assert_equal "00222", @key_2.determine_the_key_to_use
   end
-
-  def test_assign_letters_to_digits
-    @key_1.stubs(:generate_random_key).returns("56789")
-    expected = {:A=>56, :B=>67, :C=>78, :D=>89}
-    expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}
-    assert_equal expected, @key_1.assign_letters_to_digits
-    assert_equal expected_2, @key_2.assign_letters_to_digits
-  end
 end

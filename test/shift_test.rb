@@ -14,29 +14,25 @@ class ShiftTest < Minitest::Test
     @key_2 = Key.new("222")
     @offset_1 = Offset.new("")
     @offset_2 = Offset.new("071291")
-    @shift_1 = Shift.new
-    @shift_2 = Shift.new
+    @shift_1 = Shift.new(@key_1, @offset_1)
+    @shift_2 = Shift.new(@key_2, @offset_2)
   end
 
   def test_that_it_exists
     assert_instance_of Shift, @shift_1
   end
 
+  def test_that_it_has_attributes
+    assert_equal @key_2, @shift_2.key
+    assert_equal @offset_2, @shift_2.offset
+  end
+
   def test_make_shift_from_key_and_offset
-    @key_1.determine_the_key_to_use
-    @key_1.stubs(:determine_the_key_to_use).returns("56789")
-    key_hash = @key_1.assign_letters_to_digits
-    @offset_1.determine_the_offset_to_use
-    @offset_1.stubs(:determine_the_offset_to_use).returns("6961")
-    offset_hash = @offset_1.assign_letters_to_offset_digits
-    @key_2.determine_the_key_to_use
-    key_hash_2 = @key_2.assign_letters_to_digits
-    @offset_2.determine_the_offset_to_use
-    offset_hash_2 = @offset_2.assign_letters_to_offset_digits
+
     expected = {:A=>62, :B=>76, :C=>84, :D=>90}
     expected_2 = {:A=>6, :B=>8, :C=>30, :D=>23}
-    assert_equal expected, @shift_1.make_shift_from_key_and_offset(key_hash, offset_hash)
-    assert_equal expected_2, @shift_2.make_shift_from_key_and_offset(key_hash_2, offset_hash_2)
+    assert_equal expected, @shift_1.make_shift_from_key_and_offset
+    assert_equal expected_2, @shift_2.make_shift_from_key_and_offset
   end
 
   def test_create_character_set
@@ -47,11 +43,7 @@ class ShiftTest < Minitest::Test
   end
 
   def test_rotate_character_set_based_on_key_symbol
-    @key_2.determine_the_key_to_use
-    key_hash_2 = @key_2.assign_letters_to_digits
-    @offset_2.determine_the_offset_to_use
-    offset_hash_2 = @offset_2.assign_letters_to_offset_digits
-    shift = @shift_2.make_shift_from_key_and_offset(key_hash_2, offset_hash_2)
+    shift = @shift_2.make_shift_from_key_and_offset
     expected = ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
     "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b",
     "c", "d", "e", "f"]
@@ -61,4 +53,21 @@ class ShiftTest < Minitest::Test
     assert_equal expected, @shift_2.rotate_character_set(shift[:A])
     assert_equal expected_2, @shift_2.rotate_character_set(shift[:D])
   end
+
+  def test_assign_letters_to_digits
+    @key_1.stubs(:generate_random_key).returns("56789")
+    expected = {:A=>56, :B=>67, :C=>78, :D=>89}
+    expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}
+    assert_equal expected, @key_1.assign_letters_to_digits
+    assert_equal expected_2, @key_2.assign_letters_to_digits
+  end
+
+  # def test_create_rotated_character_sets
+  #   @key_2.determine_the_key_to_use
+  #   key_hash_2 = @key_2.assign_letters_to_digits
+  #   @offset_2.determine_the_offset_to_use
+  #   offset_hash_2 = @offset_2.assign_letters_to_offset_digits
+  #   shift = @shift_2.make_shift_from_key_and_offset(key_hash_2, offset_hash_2)
+  #   assert_equal [], @shift_2.create_rotated_character_sets
+  # end
 end
