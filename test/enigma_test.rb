@@ -74,9 +74,9 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.create_rotated_character_set_d
   end
 
-  # def test_that_it_can_encrypt
-  #   assert_equal "aaa", @enigma.encrypt(message, key, date)
-  # end
+  def test_that_it_can_encrypt
+    assert_equal "aaa", @enigma.encrypt("hello world!", @key_2.five_digit_key)
+  end
   #
   # def test_that_it_can_decrypt
   #   assert_equal "bbb", @enigma.decrypt(ciphertext, key, date)

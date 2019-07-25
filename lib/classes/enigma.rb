@@ -29,6 +29,14 @@ class Enigma
   end
 
   def encrypt(message, key, date)
+    current_date = DateTime.now
+    current_date_string = current_date.strftime("%d%m%y").to_s unless date.nil? == false
+    chosen_date = current_date_string
+    hash = {
+    encryption: message,
+    key: key,
+    date: chosen_date
+  }
   end
 
   def decrypt(ciphertext, key, date)
