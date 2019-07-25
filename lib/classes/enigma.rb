@@ -31,8 +31,12 @@ class Enigma
   def encrypt(message, key, date)
     @message = message
     current_date = DateTime.now
-    current_date_string = current_date.strftime("%d%m%y").to_s #unless date.nil? == false
-    chosen_date = current_date_string
+    current_date_string = current_date.strftime("%d%m%y").to_s
+    if date.nil? == true || date == ""
+      chosen_date = current_date_string
+    else date.nil? == false
+      chosen_date = date
+    end
     hash = {
     encryption: message,
     key: key,

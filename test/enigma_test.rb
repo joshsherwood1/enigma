@@ -75,7 +75,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_that_it_can_encrypt
-    assert_equal "aaa", @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    expected = {:encryption=>"hello world!", :key=>"00222", :date=>"100493"}
+    assert_equal expected, @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
   end
 
   def test_that_enigma_now_has_message
