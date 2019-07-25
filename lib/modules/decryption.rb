@@ -19,8 +19,9 @@ module Decryption
     Hash[create_character_set_for_decryption.zip(c_rotated_character_set)]
   end
 
-  def create_rotated_character_set_d_for_decryption
-    create_character_set.rotate(-(@shift[:D]))
+  def create_rotated_character_set_d_hash_for_decryption
+    d_rotated_character_set = create_character_set.rotate(-(@shift[:D]))
+    Hash[create_character_set_for_decryption.zip(d_rotated_character_set)]
   end
 
   def create_array_from_encrypted_message

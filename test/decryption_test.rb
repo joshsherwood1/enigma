@@ -61,10 +61,12 @@ class DecryptionTest < Minitest::Test
     assert_equal expected, @enigma.create_rotated_character_set_c_hash_for_decryption
   end
 
-  def test_create_rotated_character_set_d_for_decryption
-    expected = ["e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-    "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b", "c", "d"]
-    assert_equal expected, @enigma.create_rotated_character_set_d_for_decryption
+  def test_create_rotated_character_set_d_hash_for_decryption
+    expected = {"a"=>"e", "b"=>"f", "c"=>"g", "d"=>"h", "e"=>"i", "f"=>"j",
+    "g"=>"k", "h"=>"l", "i"=>"m", "j"=>"n", "k"=>"o", "l"=>"p", "m"=>"q",
+    "n"=>"r", "o"=>"s", "p"=>"t", "q"=>"u", "r"=>"v", "s"=>"w", "t"=>"x",
+    "u"=>"y", "v"=>"z", "w"=>" ", "x"=>"a", "y"=>"b", "z"=>"c", " "=>"d"}
+    assert_equal expected, @enigma.create_rotated_character_set_d_hash_for_decryption
   end
 
   def test_create_array_of_individual_characters_from_encrypted_message
