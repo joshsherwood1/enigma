@@ -1,6 +1,8 @@
 require 'date'
+require './lib/modules/decryption'
 
 class Enigma
+  include Decryption
   attr_reader :message, :shift
 
   def initialize(shift)
@@ -42,7 +44,7 @@ class Enigma
       chosen_date = date
     end
     hash = {
-    encryption: message,
+    encryption: convert_encrypted_array_to_string,
     key: key,
     date: chosen_date
   }
@@ -118,5 +120,18 @@ class Enigma
   # end
 
   def decrypt(ciphertext, key, date)
+    @message = message
+    current_date = DateTime.now
+    current_date_string = current_date.strftime("%d%m%y").to_s
+    if date.nil? == true || date == ""
+      chosen_date = current_date_string
+    else date.nil? == false
+      chosen_date = date
+    end
+    hash = {
+    encryption: "s",
+    key: key,
+    date: chosen_date
+  }
   end
 end
