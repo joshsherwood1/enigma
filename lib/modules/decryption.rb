@@ -57,4 +57,14 @@ module Decryption
       end
     end
   end
+
+  def change_d_characters_in_message_decryption
+    change_c_characters_in_message_decryption.map!.with_index do |letter, index|
+      if create_rotated_character_set_d_hash_for_decryption.keys.include?(letter) == true
+        (index + 1) % 4 == 0 ? create_rotated_character_set_d_hash_for_decryption[letter] : letter
+      else create_rotated_character_set_d_hash_for_decryption.keys.include?(letter) == false
+        (index + 1) % 4 == 0 ? letter : letter
+      end
+    end
+  end
 end
