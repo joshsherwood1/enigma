@@ -3,8 +3,8 @@ require 'date'
 class Offset
   attr_reader :user_given_date, :four_digit_offset
 
-  def initialize(user_given_date)
-    @user_given_date = user_given_date
+  def initialize
+    @user_given_date = nil
     @four_digit_offset = nil
   end
 

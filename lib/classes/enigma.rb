@@ -4,6 +4,7 @@ require './lib/classes/key'
 require './lib/classes/offset'
 require './lib/classes/shift'
 require './lib/classes/enigma'
+require 'pry'
 
 class Enigma
   include Decryption
@@ -11,11 +12,11 @@ class Enigma
 
   def initialize(shift, key_object, offset_object)
     @message = nil
-    @shift = shift
+    @shift = Shift.new(@key_object, @offset_object)
     @ciphertext = nil
     @encrypted_text = nil
-    @key_object = key_object
-    @offset_object = offset_object
+    @key_object = Key.new
+    @offset_object = Offset.new
   end
 
   def create_character_set
@@ -44,7 +45,9 @@ class Enigma
 
   def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
     @message = message
-    five_digit_key = key.rjust(5, "0")
+    date = @offset_object.user_given_date
+    @key_object.make_key(key)
+    binding.pry
     date_squared = (date.to_i ** 2).to_s
     offset = date_squared.chars.last(4).join
     create_rotated_character_set_a

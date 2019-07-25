@@ -12,12 +12,12 @@ require 'mocha/minitest'
 class DecryptionTest < Minitest::Test
 
   def setup
-      @key_1 = Key.new("")
+      @key_1 = Key.new
       @key_1.stubs(:generate_random_key).returns("56789")
-      @key_2 = Key.new("222")
-      @offset_1 = Offset.new("")
+      @key_2 = Key.new
+      @offset_1 = Offset.new
       @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-      @offset_2 = Offset.new("071291")
+      @offset_2 = Offset.new
       @key_1.determine_the_key_to_use
       @offset_1.determine_the_offset_to_use
       @key_2.determine_the_key_to_use

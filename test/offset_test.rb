@@ -10,8 +10,8 @@ require 'mocha/minitest'
 class OffsetTest < Minitest::Test
 
   def setup
-    @offset_1 = Offset.new("")
-    @offset_2 = Offset.new("071291")
+    @offset_1 = Offset.new
+    @offset_2 = Offset.new
   end
 
   def test_that_it_exists
@@ -19,8 +19,8 @@ class OffsetTest < Minitest::Test
   end
 
   def test_that_it_has_attributes
-    assert_equal "", @offset_1.user_given_date
-    assert_equal "071291", @offset_2.user_given_date
+    assert_nil @offset_1.user_given_date
+    assert_nil @offset_2.user_given_date
     assert_nil @offset_1.four_digit_offset
     assert_nil @offset_2.four_digit_offset
   end
