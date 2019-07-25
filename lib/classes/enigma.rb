@@ -3,12 +3,13 @@ require './lib/modules/decryption'
 
 class Enigma
   include Decryption
-  attr_reader :message, :shift, :ciphertext
+  attr_reader :message, :shift, :ciphertext, :encrypted_text
 
   def initialize(shift)
     @message = nil
     @shift = shift
     @ciphertext = nil
+    @encrypted_text = nil
   end
 
   def create_character_set
@@ -55,7 +56,9 @@ class Enigma
     encryption: convert_encrypted_array_to_string,
     key: key,
     date: date
-  }
+    }
+    @encrypted_text = hash[:encryption]
+    hash
   end
 
   def create_index_hash_for_a_characters

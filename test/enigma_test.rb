@@ -35,8 +35,12 @@ class EnigmaTest < Minitest::Test
 
   def test_that_it_has_attributes
     assert_nil @enigma.message
+    assert_nil @enigma.encrypted_text
     expected = {:A=>6, :B=>8, :C=>30, :D=>23}
     assert_equal expected, @enigma.shift
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    assert_equal "hello world!", @enigma.message
+    assert_equal "nmohuhzkxtg!", @enigma.encrypted_text
   end
 
   def test_create_character_set
@@ -78,7 +82,7 @@ class EnigmaTest < Minitest::Test
     expected = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"100493"}
     expected_2 = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"280719"}
     assert_equal expected, @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
-    assert_equal expected_2, @enigma.encrypt("hello world!", @key_2.five_digit_key, "")
+    assert_equal expected_2, @enigma.encrypt("hello world!", @key_2.five_digit_key, "280719")
   end
 
   def test_that_enigma_now_has_message
