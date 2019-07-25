@@ -29,4 +29,8 @@ class OffsetTest < Minitest::Test
     @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
     assert_equal "6961", @offset_1.make_offset_based_off_of_current_date
   end
+
+  def test_that_offset_is_made_with_user_given_date
+    assert_equal "0001", @offset_2.make_offset_based_off_of_user_given_date
+  end
 end
