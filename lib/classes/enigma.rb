@@ -40,7 +40,7 @@ class Enigma
   def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
     store_message_and_make_key_and_object(message, key, date)
     encrypt_message_with_shifts
-    hash = {encryption: convert_encrypted_array_to_string, key: key, date: date}
+    hash = {encryption: convert_encrypted_array_to_string, key: @key_object.five_digit_key, date: date}
     @encrypted_text = hash[:encryption]
     hash
   end
@@ -48,7 +48,7 @@ class Enigma
   def decrypt(ciphertext, key, date = @offset_object.make_current_date_into_string)
     store_ciphertext_and_make_key_and_object(ciphertext, key, date)
     decrypt_ciphertext_with_shifts
-    hash = {decryption: convert_decrypted_array_to_string, key: key, date: date}
+    hash = {decryption: convert_decrypted_array_to_string, key: @key_object.five_digit_key, date: date}
     @decrypted_text = hash[:decryption]
     hash
   end
