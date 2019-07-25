@@ -75,7 +75,12 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_that_it_can_encrypt
-    assert_equal "aaa", @enigma.encrypt("hello world!", @key_2.five_digit_key)
+    assert_equal "aaa", @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+  end
+
+  def test_that_enigma_now_has_message
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    assert_equal "hello world!", @enigma.message
   end
   #
   # def test_that_it_can_decrypt

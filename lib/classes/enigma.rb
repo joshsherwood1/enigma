@@ -29,8 +29,9 @@ class Enigma
   end
 
   def encrypt(message, key, date)
+    @message = message
     current_date = DateTime.now
-    current_date_string = current_date.strftime("%d%m%y").to_s unless date.nil? == false
+    current_date_string = current_date.strftime("%d%m%y").to_s #unless date.nil? == false
     chosen_date = current_date_string
     hash = {
     encryption: message,
