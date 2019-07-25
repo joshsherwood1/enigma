@@ -17,7 +17,6 @@ class Offset
     @chosen_date = date
     current_date_integer = date.to_i
     current_date_squared = (current_date_integer ** 2).to_s
-    offset = current_date_squared.chars.last(4).join
-    @four_digit_offset = offset
+    @four_digit_offset = current_date_squared.chars.last(4).join
   end
 end
