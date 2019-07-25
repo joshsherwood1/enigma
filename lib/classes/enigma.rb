@@ -48,6 +48,9 @@ class Enigma
     date = @offset_object.user_given_date
     @key_object.make_key(key)
     @offset_object.make_offset(date)
+    @shift.assign_letters_to_key_digits
+    @shift.assign_letters_to_offset_digits
+    @shift.make_shift_from_key_and_offset
     date_squared = (date.to_i ** 2).to_s
     offset = date_squared.chars.last(4).join
     create_rotated_character_set_a
