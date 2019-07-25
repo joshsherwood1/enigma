@@ -1,9 +1,8 @@
 class Key
-  attr_reader :user_given_key, :five_digit_key
+  attr_reader :user_given_key
 
   def initialize(user_given_key)
     @user_given_key = user_given_key
-    @five_digit_key = nil
   end
 
   def generate_random_key
@@ -16,9 +15,9 @@ class Key
 
   def determine_the_key_to_use
     if @user_given_key == ""
-      @five_digit_key = generate_random_key
+      generate_random_key
     else
-      @five_digit_key = generate_five_digits_with_user_given_key
+      generate_five_digits_with_user_given_key
     end
   end
 end
