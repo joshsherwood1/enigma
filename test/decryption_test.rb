@@ -54,4 +54,10 @@ class DecryptionTest < Minitest::Test
     "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x"]
     assert_equal expected, @enigma.create_rotated_character_set_c_for_decryption
   end
+
+  def test_create_rotated_character_set_d_for_decryption
+    expected = ["e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
+    "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b", "c", "d"]
+    assert_equal expected, @enigma.create_rotated_character_set_d_for_decryption
+  end
 end
