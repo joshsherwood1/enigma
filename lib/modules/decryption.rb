@@ -1,27 +1,23 @@
 module Decryption
 
-  def create_character_set_for_decryption
-    ("a".."z").to_a << " "
-  end
-
   def create_shift_a_hash_decryption
     a_rotated_character_set = create_character_set.rotate(-(@shift.official_shift[:A]))
-    Hash[create_character_set_for_decryption.zip(a_rotated_character_set)]
+    Hash[create_character_set.zip(a_rotated_character_set)]
   end
 
   def create_shift_b_hash_decryption
     b_rotated_character_set = create_character_set.rotate(-(@shift.official_shift[:B]))
-    Hash[create_character_set_for_decryption.zip(b_rotated_character_set)]
+    Hash[create_character_set.zip(b_rotated_character_set)]
   end
 
   def create_shift_c_hash_decryption
     c_rotated_character_set = create_character_set.rotate(-(@shift.official_shift[:C]))
-    Hash[create_character_set_for_decryption.zip(c_rotated_character_set)]
+    Hash[create_character_set.zip(c_rotated_character_set)]
   end
 
   def create_shift_d_hash_decryption
     d_rotated_character_set = create_character_set.rotate(-(@shift.official_shift[:D]))
-    Hash[create_character_set_for_decryption.zip(d_rotated_character_set)]
+    Hash[create_character_set.zip(d_rotated_character_set)]
   end
 
   def create_array_from_encrypted_message
@@ -86,5 +82,17 @@ module Decryption
     change_c_characters_in_message_decryption
     change_d_characters_in_message_decryption
     convert_decrypted_array_to_string
+  end
+
+  def store_ciphertext_and_make_key_and_object(ciphertext, key, date)
+    @ciphertext = ciphertext
+    @key_object.make_key(key)
+    @offset_object.make_offset(date)
+  end
+
+  def decrypt_ciphertext_with_shifts
+    make_shift
+    create_shift_hashes_and_array_of_encrypted_message
+    change_encrypted_message_characters_and_convert_to_string
   end
 end

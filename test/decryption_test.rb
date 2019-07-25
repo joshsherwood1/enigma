@@ -24,13 +24,6 @@ class DecryptionTest < Minitest::Test
     @enigma.store_shift(@shift_2)
   end
 
-  def test_create_character_set_for_decryption
-    expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
-    "x", "y", "z", " "]
-    assert_equal expected, @enigma.create_character_set_for_decryption
-  end
-
   def test_create_shift_a_hash_decryption
     expected = {"a"=>"v", "b"=>"w", "c"=>"x", "d"=>"y", "e"=>"z", "f"=>" ",
     "g"=>"a", "h"=>"b", "i"=>"c", "j"=>"d", "k"=>"e", "l"=>"f", "m"=>"g",
@@ -112,5 +105,15 @@ class DecryptionTest < Minitest::Test
   def test_change_encrypted_message_characters_and_convert_to_string
     @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     assert_equal "hello world!", @enigma.change_encrypted_message_characters_and_convert_to_string
+  end
+
+  def test_that_ciphertext_is_stored_and_key_and_object_are_made
+    assert_equal "6681", @enigma.store_ciphertext_and_make_key_and_object("nmohuhzkxtg!", "00222", "071291")
+    assert_equal "nmohuhzkxtg!", @enigma.ciphertext
+  end
+
+  def test_that_ciphertext_is_decrypted_with_shifts
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+    assert_equal "hello world!", @enigma.decrypt_ciphertext_with_shifts
   end
 end

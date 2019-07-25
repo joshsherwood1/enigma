@@ -52,29 +52,4 @@ class Enigma
     @decrypted_text = hash[:decryption]
     hash
   end
-
-  def store_ciphertext_and_make_key_and_object(ciphertext, key, date)
-    @ciphertext = ciphertext
-    @key_object.make_key(key)
-    @offset_object.make_offset(date)
-  end
-
-  def decrypt_ciphertext_with_shifts
-    make_shift
-    create_shift_hashes_and_array_of_encrypted_message
-    change_encrypted_message_characters_and_convert_to_string
-  end
-
-  def store_message_and_make_key_and_object(message, key, date)
-    @message = message
-    @key_object.make_key(key)
-    @offset_object.make_offset(date)
-  end
-
-  def encrypt_message_with_shifts
-    make_shift
-    create_shift_hashes_and_array_of_message
-    change_message_characters_and_convert_to_string
-  end
-
 end
