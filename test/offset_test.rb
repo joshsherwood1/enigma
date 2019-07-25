@@ -9,4 +9,9 @@ require 'pry'
 require 'mocha/minitest'
 
 class OffsetTest < Minitest::Test
+
+  def setup
+    @offset_1 = Offset.new
+    @offset_2 = Offset.new
+  end
 end
