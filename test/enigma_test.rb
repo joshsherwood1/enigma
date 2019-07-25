@@ -152,6 +152,11 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.change_d_characters_in_message
   end
 
+  def test_that_encrypted_message_is_converted_back_to_a_string
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    assert_equal "nmohuhzkxtg!", @enigma.convert_encrypted_array_to_string
+  end
+
   #
   # def test_that_it_can_decrypt
   #   assert_equal "bbb", @enigma.decrypt(ciphertext, key, date)

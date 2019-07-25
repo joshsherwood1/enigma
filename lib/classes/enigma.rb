@@ -104,6 +104,10 @@ class Enigma
     end
   end
 
+  def convert_encrypted_array_to_string
+    change_d_characters_in_message.join("").to_s
+  end
+
 
 
   # def recreate_message_with_a_characters_changed
