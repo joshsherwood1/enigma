@@ -37,17 +37,24 @@ class Enigma
 
   def encrypt(message, key, date)
     @message = message
-    current_date = DateTime.now
-    current_date_string = current_date.strftime("%d%m%y").to_s
-    if date.nil? == true || date == ""
-      chosen_date = current_date_string
-    else date.nil? == false
-      chosen_date = date
-    end
+    create_rotated_character_set_a
+    create_rotated_character_set_b
+    create_rotated_character_set_c
+    create_rotated_character_set_d
+    create_array_from_message
+    create_index_hash_for_a_characters
+    change_a_characters_in_message
+    create_index_hash_for_b_characters
+    change_b_characters_in_message
+    create_index_hash_for_c_characters
+    change_c_characters_in_message
+    create_index_hash_for_d_characters
+    change_d_characters_in_message
+    convert_encrypted_array_to_string
     hash = {
     encryption: convert_encrypted_array_to_string,
     key: key,
-    date: chosen_date
+    date: date
   }
   end
 
