@@ -25,17 +25,17 @@ message.close
 @shift_1.make_shift_from_key_and_offset
 
 @enigma = Enigma.new(@shift_1.make_shift_from_key_and_offset)
-@enigma.encrypt(incoming_message, @key.five_digit_key, current_date_string)
+@enigma.decrypt(incoming_message, @key.five_digit_key, current_date_string)
 # @enigma.create_rotated_character_set_a
-@enigma.encrypted_text
+@enigma.decrypted_text
 # binding.pry
 
 #
 # puts "You are creating a cipher using the enigma machine. Please enter a key for the cipher:"
 # user_key = gets.chomp
 
-capitalized_message = @enigma.encrypted_text
+decrypted_message = @enigma.decrypted_text
 writer = File.open(ARGV[1], "w")
-writer.write(capitalized_message)
+writer.write(decrypted_message)
 writer.close
 puts "Created '#{ARGV[1]}' with the key #{@key.five_digit_key} and date #{current_date_string}"
