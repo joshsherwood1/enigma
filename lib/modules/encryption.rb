@@ -66,4 +66,20 @@ module Encryption
   def convert_encrypted_array_to_string
     change_d_characters_in_message.join("").to_s
   end
+
+  def create_shift_hashes_and_array_of_message
+    create_shift_a_hash
+    create_shift_b_hash
+    create_shift_c_hash
+    create_shift_d_hash
+    create_array_from_message
+  end
+
+  def change_message_characters_and_convert_to_string
+    change_a_characters_in_message
+    change_b_characters_in_message
+    change_c_characters_in_message
+    change_d_characters_in_message
+    convert_encrypted_array_to_string
+  end
 end

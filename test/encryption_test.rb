@@ -90,4 +90,15 @@ class EncryptionTest < Minitest::Test
     @enigma.encrypt("hello world!", "00222", "071291")
     assert_equal "nmohuhzkxtg!", @enigma.convert_encrypted_array_to_string
   end
+
+  def test_create_shift_hashes_and_array_of_message
+    @enigma.encrypt("hello world!", "00222", "071291")
+    expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
+    assert_equal expected, @enigma.create_shift_hashes_and_array_of_message
+  end
+
+  def test_change_message_characters_and_convert_to_string
+    @enigma.encrypt("hello world!", "00222", "071291")
+    assert_equal "nmohuhzkxtg!", @enigma.change_message_characters_and_convert_to_string
+  end
 end

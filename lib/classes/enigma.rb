@@ -38,24 +38,8 @@ class Enigma
   end
 
   def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
-    @message = message
-    @key_object.make_key(key)
-    @offset_object.make_offset(date)
-    shift = Shift.new(@key_object, @offset_object)
-    store_shift(shift)
-    @shift.assign_letters_to_key_digits
-    @shift.assign_letters_to_offset_digits
-    @shift.make_shift_from_key_and_offset
-    create_shift_a_hash
-    create_shift_b_hash
-    create_shift_c_hash
-    create_shift_d_hash
-    create_array_from_message
-    change_a_characters_in_message
-    change_b_characters_in_message
-    change_c_characters_in_message
-    change_d_characters_in_message
-    convert_encrypted_array_to_string
+    store_message_and_make_key_and_object(message, key, date)
+    encrypt_message_with_shifts
     hash = {encryption: convert_encrypted_array_to_string, key: key, date: date}
     @encrypted_text = hash[:encryption]
     hash
@@ -79,6 +63,18 @@ class Enigma
     make_shift
     create_shift_hashes_and_array_of_encrypted_message
     change_encrypted_message_characters_and_convert_to_string
+  end
+
+  def store_message_and_make_key_and_object(message, key, date)
+    @message = message
+    @key_object.make_key(key)
+    @offset_object.make_offset(date)
+  end
+
+  def encrypt_message_with_shifts
+    make_shift
+    create_shift_hashes_and_array_of_message
+    change_message_characters_and_convert_to_string
   end
 
 end
