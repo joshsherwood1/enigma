@@ -63,38 +63,43 @@ class DecryptionTest < Minitest::Test
     assert_equal expected, @enigma.create_rotated_character_set_d_hash_for_decryption
   end
 
+  def test_that_ciphertext_now_has_text
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+    assert_equal "nmohuhzkxtg!", @enigma.ciphertext
+  end
+
   def test_create_array_of_individual_characters_from_encrypted_message
-    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     expected = ["n", "m", "o", "h", "u", "h", "z", "k", "x", "t", "g", "!"]
     assert_equal expected, @enigma.create_array_from_encrypted_message
   end
 
   def test_that_a_characters_are_changed_decryption
-    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     expected = ["h", "m", "o", "h", "o", "h", "z", "k", "r", "t", "g", "!"]
     assert_equal expected, @enigma.change_a_characters_in_message_decryption
   end
 
   def test_that_b_characters_are_changed_decryption
-    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     expected = ["h", "e", "o", "h", "o", " ", "z", "k", "r", "l", "g", "!"]
     assert_equal expected, @enigma.change_b_characters_in_message_decryption
   end
 
   def test_that_c_characters_are_changed_decryption
-    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     expected = ["h", "e", "l", "h", "o", " ", "w", "k", "r", "l", "d", "!"]
     assert_equal expected, @enigma.change_c_characters_in_message_decryption
   end
 
   def test_that_d_characters_are_changed_decryption
-    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
     assert_equal expected, @enigma.change_d_characters_in_message_decryption
   end
 
   def test_that_decrypted_message_is_converted_back_to_a_string
-    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     assert_equal "hello world!", @enigma.convert_decrypted_array_to_string
   end
 end
