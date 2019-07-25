@@ -40,8 +40,8 @@ class OffsetTest < Minitest::Test
   end
 
   def test_assign_letters_to_offset_digits
-    expected = {A: "6", B: "9", C: "6", D: "1"}
-    expected_2 = {A: "6", B: "6", C: "8", D: "1"}
+    expected = {A: 6, B: 9, C: 6, D: 1}
+    expected_2 = {A: 6, B: 6, C: 8, D: 1}
     assert_equal expected, @offset_1.assign_letters_to_offset_digits
     assert_equal expected_2, @offset_2.assign_letters_to_offset_digits
   end
