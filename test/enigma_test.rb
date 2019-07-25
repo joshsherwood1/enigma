@@ -28,7 +28,7 @@ class EnigmaTest < Minitest::Test
     @shift_2.assign_letters_to_offset_digits
     @shift_2.make_shift_from_key_and_offset
     @enigma = Enigma.new
-    @enigma.make_shift_the_official_shift(@shift_2)
+    @enigma.store_shift(@shift_2)
   end
 
   def test_that_it_exists
@@ -36,8 +36,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_that_it_has_attributes
-    # assert_equal @key_2, @enigma.key_object
-    # assert_equal Offset.new, @enigma.offset_object
+    assert_instance_of Key, @enigma.key_object
+    assert_instance_of Offset, @enigma.offset_object
     assert_nil @enigma.message
     assert_nil @enigma.encrypted_text
     expected = {:A=>6, :B=>8, :C=>30, :D=>23}
@@ -91,5 +91,10 @@ class EnigmaTest < Minitest::Test
   def test_that_ciphertext_is_decrypted_with_shifts
     @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     assert_equal "hello world!", @enigma.decrypt_ciphertext_with_shifts
+  end
+
+  def test_store_shift
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+    assert_equal @shift_2, @enigma.store_shift(@shift_2)
   end
 end

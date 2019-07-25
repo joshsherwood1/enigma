@@ -21,7 +21,7 @@ class EncryptionTest < Minitest::Test
     @shift_2.assign_letters_to_offset_digits
     @shift_2.make_shift_from_key_and_offset
     @enigma = Enigma.new
-    @enigma.make_shift_the_official_shift(@shift_2)
+    @enigma.store_shift(@shift_2)
   end
 
   def test_create_shift_a_hash

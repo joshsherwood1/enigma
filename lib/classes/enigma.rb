@@ -25,13 +25,13 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
-  def make_shift_the_official_shift(shift)
+  def store_shift(shift)
     @shift = shift
   end
 
   def make_shift
     shift = Shift.new(@key_object, @offset_object)
-    make_shift_the_official_shift(shift)
+    store_shift(shift)
     @shift.assign_letters_to_key_digits
     @shift.assign_letters_to_offset_digits
     @shift.make_shift_from_key_and_offset
@@ -42,7 +42,7 @@ class Enigma
     @key_object.make_key(key)
     @offset_object.make_offset(date)
     shift = Shift.new(@key_object, @offset_object)
-    make_shift_the_official_shift(shift)
+    store_shift(shift)
     @shift.assign_letters_to_key_digits
     @shift.assign_letters_to_offset_digits
     @shift.make_shift_from_key_and_offset
