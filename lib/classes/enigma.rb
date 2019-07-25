@@ -10,7 +10,7 @@ class Enigma
   include Decryption
   attr_reader :message, :shift, :ciphertext, :encrypted_text, :key_object, :offset_object
 
-  def initialize(shift, key_object, offset_object)
+  def initialize
     @message = nil
     @shift = Shift.new(@key_object, @offset_object)
     @ciphertext = nil
@@ -23,20 +23,24 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
+  def make_shift_the_official_shift(shift)
+    @shift = shift
+  end
+
   def create_rotated_character_set_a
-    create_character_set.rotate(@shift[:A])
+    create_character_set.rotate(@shift.official_shift[:A])
   end
 
   def create_rotated_character_set_b
-    create_character_set.rotate(@shift[:B])
+    create_character_set.rotate(@shift.official_shift[:B])
   end
 
   def create_rotated_character_set_c
-    create_character_set.rotate(@shift[:C])
+    create_character_set.rotate(@shift.official_shift[:C])
   end
 
   def create_rotated_character_set_d
-    create_character_set.rotate(@shift[:D])
+    create_character_set.rotate(@shift.official_shift[:D])
   end
 
   def create_array_from_message
@@ -45,14 +49,13 @@ class Enigma
 
   def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
     @message = message
-    date = @offset_object.user_given_date
     @key_object.make_key(key)
     @offset_object.make_offset(date)
+    shift = Shift.new(@key_object, @offset_object)
+    make_shift_the_official_shift(shift)
     @shift.assign_letters_to_key_digits
     @shift.assign_letters_to_offset_digits
     @shift.make_shift_from_key_and_offset
-    date_squared = (date.to_i ** 2).to_s
-    offset = date_squared.chars.last(4).join
     create_rotated_character_set_a
     create_rotated_character_set_b
     create_rotated_character_set_c
@@ -69,7 +72,7 @@ class Enigma
     convert_encrypted_array_to_string
     hash = {
     encryption: convert_encrypted_array_to_string,
-    key: five_digit_key,
+    key: key,
     date: date
     }
     @encrypted_text = hash[:encryption]
