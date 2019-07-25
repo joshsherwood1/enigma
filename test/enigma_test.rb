@@ -92,7 +92,7 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.create_array_from_message
   end
 
-  def test_create_index_hash_with_message
+  def test_create_index_hash_for_a_characters
     @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
     expected = {"a"=>"g", "b"=>"h", "c"=>"i", "d"=>"j", "e"=>"k", "f"=>"l",
     "g"=>"m", "h"=>"n", "i"=>"o", "j"=>"p", "k"=>"q", "l"=> "r",
@@ -105,6 +105,21 @@ class EnigmaTest < Minitest::Test
     @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
     expected = ["n", "e", "l", "l", "u", " ", "w", "o", "x", "l", "d", "!"]
     assert_equal expected, @enigma.change_a_characters_in_message
+  end
+
+  def test_create_index_hash_for_b_characters
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    expected = {"a"=>"i", "b"=>"j", "c"=>"k", "d"=>"l", "e"=>"m", "f"=>"n",
+    "g"=>"o", "h"=>"p", "i"=>"q", "j"=>"r", "k"=>"s", "l"=>"t", "m"=>"u",
+    "n"=>"v", "o"=>"w", "p"=>"x", "q"=>"y", "r"=>"z", "s"=>" ", "t"=>"a",
+    "u"=>"b", "v"=>"c", "w"=>"d", "x"=>"e", "y"=>"f", "z"=>"g", " "=>"h"}
+    assert_equal expected, @enigma.create_index_hash_for_b_characters
+  end
+
+  def test_that_b_characters_are_changed
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    expected = ["n", "m", "l", "l", "u", "h", "w", "o", "x", "t", "d", "!"]
+    assert_equal expected, @enigma.change_b_characters_in_message
   end
 
   #
