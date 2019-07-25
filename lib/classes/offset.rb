@@ -10,7 +10,7 @@ class Offset
 
   def make_current_date_into_string
     current_date = DateTime.now
-    current_date_integer = current_date.strftime("%d%m%y").to_s
+    current_date.strftime("%d%m%y").to_s
   end
 
   def make_offset(date)
