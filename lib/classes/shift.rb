@@ -1,9 +1,10 @@
 class Shift
-  attr_reader :key, :offset
+  attr_reader :key, :offset, :official_shift
 
   def initialize(key, offset)
     @key = key
     @offset = offset
+    @official_shift = nil
   end
 
   def assign_letters_to_key_digits
@@ -25,7 +26,7 @@ class Shift
   end
 
   def make_shift_from_key_and_offset
-    assign_letters_to_key_digits.merge!(assign_letters_to_offset_digits) {|letter, digit_1, digit_2| digit_1 + digit_2 }
+    @official_shift = assign_letters_to_key_digits.merge!(assign_letters_to_offset_digits) {|letter, digit_1, digit_2| digit_1 + digit_2 }
   end
 
   def create_character_set
