@@ -11,14 +11,6 @@ require 'mocha/minitest'
 class EnigmaTest < Minitest::Test
 
   def setup
-    # @key_1 = Key.new
-    # @offset_1 = Offset.new
-    # @key_1.make_key("45999")
-    # @offset_1.make_offset("161116")
-    # @shift_1 = Shift.new(@key_2, @offset_2)
-    # @shift_1.assign_letters_to_key_digits
-    # @shift_1.assign_letters_to_offset_digits
-    # @shift_1.make_shift_from_key_and_offset
     @key_2 = Key.new
     @offset_2 = Offset.new
     @key_2.make_key("222")
@@ -38,9 +30,10 @@ class EnigmaTest < Minitest::Test
   def test_that_it_has_attributes
     assert_instance_of Key, @enigma.key_object
     assert_instance_of Offset, @enigma.offset_object
+    assert_instance_of Shift, @enigma.shift
     assert_nil @enigma.message
     assert_nil @enigma.encrypted_text
-    expected = {:A=>6, :B=>8, :C=>30, :D=>23}
+    assert_nil @enigma.ciphertext
     assert_equal @shift_2, @enigma.shift
     @enigma.encrypt("hello world!", "00222", "071291")
     assert_equal "hello world!", @enigma.message
@@ -54,21 +47,9 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.create_character_set
   end
 
-  def test_that_it_can_encrypt
-    expected = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"071291"}
-    # expected_2 = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"280719"}
-    assert_equal expected, @enigma.encrypt("hello world!", "00222", "071291")
-    # assert_equal expected_2, @enigma.encrypt("hello world!", "00222", "071291")
-  end
-
-  def test_that_enigma_now_has_message
-    @enigma.encrypt("hello world!", "00222", "071291")
-    assert_equal "hello world!", @enigma.message
-  end
-
-  def test_that_it_can_decrypt
-    expected = {:decryption=>"hello world!", :key=>"00222", :date=>"071291"}
-    assert_equal expected, @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+  def test_store_shift
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+    assert_equal @shift_2, @enigma.store_shift(@shift_2)
   end
 
   def test_that_shift_is_made_with_encrypt
@@ -83,8 +64,13 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.make_shift
   end
 
-  def test_store_shift
-    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
-    assert_equal @shift_2, @enigma.store_shift(@shift_2)
+  def test_that_it_can_encrypt
+    expected = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"071291"}
+    assert_equal expected, @enigma.encrypt("hello world!", "00222", "071291")
+  end
+
+  def test_that_it_can_decrypt
+    expected = {:decryption=>"hello world!", :key=>"00222", :date=>"071291"}
+    assert_equal expected, @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
   end
 end
