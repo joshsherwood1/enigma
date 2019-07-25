@@ -9,7 +9,7 @@ incoming_message = message.read.chomp.downcase
 message.close
 
 enigma = Enigma.new
-enigma.encrypt(incoming_message, "88990", "171275")
+enigma.encrypt(incoming_message)
 enigma.encrypted_text
 
 capitalized_message = enigma.encrypted_text

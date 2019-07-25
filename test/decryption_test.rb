@@ -56,11 +56,6 @@ class DecryptionTest < Minitest::Test
     assert_equal expected, @enigma.create_shift_d_hash_decryption
   end
 
-  def test_that_ciphertext_now_has_text
-    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
-    assert_equal "nmohuhzkxtg!", @enigma.ciphertext
-  end
-
   def test_create_array_of_individual_characters_from_encrypted_message
     @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     expected = ["n", "m", "o", "h", "u", "h", "z", "k", "x", "t", "g", "!"]
@@ -109,6 +104,11 @@ class DecryptionTest < Minitest::Test
 
   def test_that_ciphertext_is_stored_and_key_and_object_are_made
     assert_equal "6681", @enigma.store_ciphertext_and_make_key_and_object("nmohuhzkxtg!", "00222", "071291")
+    assert_equal "nmohuhzkxtg!", @enigma.ciphertext
+  end
+
+  def test_that_ciphertext_now_has_text
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
     assert_equal "nmohuhzkxtg!", @enigma.ciphertext
   end
 
