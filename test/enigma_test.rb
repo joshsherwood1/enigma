@@ -70,4 +70,26 @@ class EnigmaTest < Minitest::Test
     expected = {:decryption=>"hello world!", :key=>"00222", :date=>"071291"}
     assert_equal expected, @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
   end
+
+  def test_that_shift_is_made_with_encrypt
+    @enigma.encrypt("hello world!", "00222", "071291")
+    expected = {:A=>6, :B=>8, :C=>30, :D=>23}
+    assert_equal expected, @enigma.make_shift
+  end
+
+  def test_that_shift_is_made_with_decrypt
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+    expected = {:A=>6, :B=>8, :C=>30, :D=>23}
+    assert_equal expected, @enigma.make_shift
+  end
+
+  def test_that_ciphertext_is_stored_and_key_and_object_are_made
+    assert_equal "6681", @enigma.store_ciphertext_and_make_key_and_object("nmohuhzkxtg!", "00222", "071291")
+    assert_equal "nmohuhzkxtg!", @enigma.ciphertext
+  end
+
+  def test_that_ciphertext_is_decrypted_with_shifts
+    @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+    assert_equal "hello world!", @enigma.decrypt_ciphertext_with_shifts
+  end
 end
