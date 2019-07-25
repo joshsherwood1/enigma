@@ -36,9 +36,9 @@ module Encryption
   def change_b_characters_in_message
     change_a_characters_in_message.map!.with_index do |letter, index|
       if create_shift_b_hash.keys.include?(letter) == true
-        (index + 3) % 4 == 0 ? create_shift_b_hash[letter] : letter
+        index % 4 == 1 ? create_shift_b_hash[letter] : letter
       else create_shift_b_hash.keys.include?(letter) == false
-        (index + 3) % 4 == 0 ? letter : letter
+        index % 4 == 1 ? letter : letter
       end
     end
   end
@@ -46,9 +46,9 @@ module Encryption
   def change_c_characters_in_message
     change_b_characters_in_message.map!.with_index do |letter, index|
       if create_shift_c_hash.keys.include?(letter) == true
-        (index + 2) % 4 == 0 ? create_shift_c_hash[letter] : letter
+        index % 4 == 2 ? create_shift_c_hash[letter] : letter
       else create_shift_c_hash.keys.include?(letter) == false
-        (index + 2) % 4 == 0 ? letter : letter
+        index % 4 == 2 ? letter : letter
       end
     end
   end
@@ -56,9 +56,9 @@ module Encryption
   def change_d_characters_in_message
     change_c_characters_in_message.map!.with_index do |letter, index|
       if create_shift_d_hash.keys.include?(letter) == true
-        (index + 1) % 4 == 0 ? create_shift_d_hash[letter] : letter
+        index % 4 == 3 ? create_shift_d_hash[letter] : letter
       else create_shift_d_hash.keys.include?(letter) == false
-        (index + 1) % 4 == 0 ? letter : letter
+        index % 4 == 3 ? letter : letter
       end
     end
   end
