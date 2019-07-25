@@ -29,19 +29,23 @@ class Enigma
   end
 
   def create_rotated_character_set_a
-    create_character_set.rotate(@shift.official_shift[:A])
+    rotated_character_set_a = create_character_set.rotate(@shift.official_shift[:A])
+    Hash[create_character_set.zip(rotated_character_set_a)]
   end
 
   def create_rotated_character_set_b
-    create_character_set.rotate(@shift.official_shift[:B])
+    rotated_character_set_b = create_character_set.rotate(@shift.official_shift[:B])
+    Hash[create_character_set.zip(rotated_character_set_b)]
   end
 
   def create_rotated_character_set_c
-    create_character_set.rotate(@shift.official_shift[:C])
+    rotated_character_set_c = create_character_set.rotate(@shift.official_shift[:C])
+    Hash[create_character_set.zip(rotated_character_set_c)]
   end
 
   def create_rotated_character_set_d
-    create_character_set.rotate(@shift.official_shift[:D])
+    rotated_character_set_d = create_character_set.rotate(@shift.official_shift[:D])
+    Hash[create_character_set.zip(rotated_character_set_d)]
   end
 
   def create_array_from_message
@@ -62,13 +66,9 @@ class Enigma
     create_rotated_character_set_c
     create_rotated_character_set_d
     create_array_from_message
-    create_index_hash_for_a_characters
     change_a_characters_in_message
-    create_index_hash_for_b_characters
     change_b_characters_in_message
-    create_index_hash_for_c_characters
     change_c_characters_in_message
-    create_index_hash_for_d_characters
     change_d_characters_in_message
     convert_encrypted_array_to_string
     hash = {
@@ -80,57 +80,41 @@ class Enigma
     hash
   end
 
-  def create_index_hash_for_a_characters
-    Hash[create_character_set.zip(create_rotated_character_set_a)]
-  end
-
   def change_a_characters_in_message
     create_array_from_message.map!.with_index do |letter, index|
-      if create_index_hash_for_a_characters.keys.include?(letter) == true
-        index % 4 == 0 ? create_index_hash_for_a_characters[letter] : letter
-      else create_index_hash_for_a_characters.keys.include?(letter) == false
+      if create_rotated_character_set_a.keys.include?(letter) == true
+        index % 4 == 0 ? create_rotated_character_set_a[letter] : letter
+      else create_rotated_character_set_a.keys.include?(letter) == false
         index % 4 == 0 ? letter : letter
       end
     end
   end
 
-  def create_index_hash_for_b_characters
-    Hash[create_character_set.zip(create_rotated_character_set_b)]
-  end
-
   def change_b_characters_in_message
     change_a_characters_in_message.map!.with_index do |letter, index|
-      if create_index_hash_for_b_characters.keys.include?(letter) == true
-        (index + 3) % 4 == 0 ? create_index_hash_for_b_characters[letter] : letter
-      else create_index_hash_for_b_characters.keys.include?(letter) == false
+      if create_rotated_character_set_b.keys.include?(letter) == true
+        (index + 3) % 4 == 0 ? create_rotated_character_set_b[letter] : letter
+      else create_rotated_character_set_b.keys.include?(letter) == false
         (index + 3) % 4 == 0 ? letter : letter
       end
     end
   end
 
-  def create_index_hash_for_c_characters
-    Hash[create_character_set.zip(create_rotated_character_set_c)]
-  end
-
   def change_c_characters_in_message
     change_b_characters_in_message.map!.with_index do |letter, index|
-      if create_index_hash_for_c_characters.keys.include?(letter) == true
-        (index + 2) % 4 == 0 ? create_index_hash_for_c_characters[letter] : letter
-      else create_index_hash_for_c_characters.keys.include?(letter) == false
+      if create_rotated_character_set_c.keys.include?(letter) == true
+        (index + 2) % 4 == 0 ? create_rotated_character_set_c[letter] : letter
+      else create_rotated_character_set_c.keys.include?(letter) == false
         (index + 2) % 4 == 0 ? letter : letter
       end
     end
   end
 
-  def create_index_hash_for_d_characters
-    Hash[create_character_set.zip(create_rotated_character_set_d)]
-  end
-
   def change_d_characters_in_message
     change_c_characters_in_message.map!.with_index do |letter, index|
-      if create_index_hash_for_d_characters.keys.include?(letter) == true
-        (index + 1) % 4 == 0 ? create_index_hash_for_d_characters[letter] : letter
-      else create_index_hash_for_d_characters.keys.include?(letter) == false
+      if create_rotated_character_set_d.keys.include?(letter) == true
+        (index + 1) % 4 == 0 ? create_rotated_character_set_d[letter] : letter
+      else create_rotated_character_set_d.keys.include?(letter) == false
         (index + 1) % 4 == 0 ? letter : letter
       end
     end

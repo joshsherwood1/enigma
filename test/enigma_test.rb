@@ -55,30 +55,34 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_create_rotated_character_set_a
-    expected = ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
-    "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b",
-    "c", "d", "e", "f"]
+    expected = {"a"=>"g", "b"=>"h", "c"=>"i", "d"=>"j", "e"=>"k", "f"=>"l",
+    "g"=>"m", "h"=>"n", "i"=>"o", "j"=>"p", "k"=>"q", "l"=>"r", "m"=>"s",
+    "n"=>"t", "o"=>"u", "p"=>"v", "q"=>"w", "r"=>"x", "s"=>"y", "t"=>"z",
+    "u"=>" ", "v"=>"a", "w"=>"b", "x"=>"c", "y"=>"d", "z"=>"e", " "=>"f"}
     assert_equal expected, @enigma.create_rotated_character_set_a
   end
 
   def test_create_rotated_character_set_b
-    expected = ["i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-    "u", "v", "w", "x", "y", "z", " ", "a", "b", "c", "d",
-    "e", "f", "g", "h"]
+    expected = {"a"=>"i", "b"=>"j", "c"=>"k", "d"=>"l", "e"=>"m", "f"=>"n",
+    "g"=>"o", "h"=>"p", "i"=>"q", "j"=>"r", "k"=>"s", "l"=>"t", "m"=>"u",
+    "n"=>"v", "o"=>"w", "p"=>"x", "q"=>"y", "r"=>"z", "s"=>" ", "t"=>"a",
+    "u"=>"b", "v"=>"c", "w"=>"d", "x"=>"e", "y"=>"f", "z"=>"g", " "=>"h"}
     assert_equal expected, @enigma.create_rotated_character_set_b
   end
 
   def test_create_rotated_character_set_c
-    expected = ["d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
-    "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-    " ", "a", "b", "c"]
+    expected = {"a"=>"d", "b"=>"e", "c"=>"f", "d"=>"g", "e"=>"h", "f"=>"i",
+    "g"=>"j", "h"=>"k", "i"=>"l", "j"=>"m", "k"=>"n", "l"=>"o", "m"=>"p",
+    "n"=>"q", "o"=>"r", "p"=>"s", "q"=>"t", "r"=>"u", "s"=>"v", "t"=>"w",
+    "u"=>"x", "v"=>"y", "w"=>"z", "x"=>" ", "y"=>"a", "z"=>"b", " "=>"c"}
     assert_equal expected, @enigma.create_rotated_character_set_c
   end
 
   def test_create_rotated_character_set_d
-    expected = ["x", "y", "z", " ", "a", "b", "c", "d", "e", "f", "g", "h",
-    "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-    "t", "u", "v", "w"]
+    expected = {"a"=>"x", "b"=>"y", "c"=>"z", "d"=>" ", "e"=>"a", "f"=>"b",
+    "g"=>"c", "h"=>"d", "i"=>"e", "j"=>"f", "k"=>"g", "l"=>"h", "m"=>"i",
+    "n"=>"j", "o"=>"k", "p"=>"l", "q"=>"m", "r"=>"n", "s"=>"o", "t"=>"p",
+    "u"=>"q", "v"=>"r", "w"=>"s", "x"=>"t", "y"=>"u", "z"=>"v", " "=>"w"}
     assert_equal expected, @enigma.create_rotated_character_set_d
   end
 
@@ -100,28 +104,10 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.create_array_from_message
   end
 
-  def test_create_index_hash_for_a_characters
-    @enigma.encrypt("hello world!", "00222", "071291")
-    expected = {"a"=>"g", "b"=>"h", "c"=>"i", "d"=>"j", "e"=>"k", "f"=>"l",
-    "g"=>"m", "h"=>"n", "i"=>"o", "j"=>"p", "k"=>"q", "l"=> "r",
-    "m"=>"s", "n"=>"t", "o"=>"u", "p"=>"v", "q"=>"w", "r"=>"x", "s"=>"y",
-    "t"=>"z", "u"=>" ", "v"=>"a", "w"=>"b", "x"=>"c", "y"=>"d", "z"=>"e", " "=>"f"}
-    assert_equal expected, @enigma.create_index_hash_for_a_characters
-  end
-
   def test_that_a_characters_are_changed
     @enigma.encrypt("hello world!", "00222", "071291")
     expected = ["n", "e", "l", "l", "u", " ", "w", "o", "x", "l", "d", "!"]
     assert_equal expected, @enigma.change_a_characters_in_message
-  end
-
-  def test_create_index_hash_for_b_characters
-    @enigma.encrypt("hello world!", "00222", "071291")
-    expected = {"a"=>"i", "b"=>"j", "c"=>"k", "d"=>"l", "e"=>"m", "f"=>"n",
-    "g"=>"o", "h"=>"p", "i"=>"q", "j"=>"r", "k"=>"s", "l"=>"t", "m"=>"u",
-    "n"=>"v", "o"=>"w", "p"=>"x", "q"=>"y", "r"=>"z", "s"=>" ", "t"=>"a",
-    "u"=>"b", "v"=>"c", "w"=>"d", "x"=>"e", "y"=>"f", "z"=>"g", " "=>"h"}
-    assert_equal expected, @enigma.create_index_hash_for_b_characters
   end
 
   def test_that_b_characters_are_changed
@@ -130,28 +116,10 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.change_b_characters_in_message
   end
 
-  def test_create_index_hash_for_c_characters
-    @enigma.encrypt("hello world!", "00222", "071291")
-    expected = {"a"=>"d", "b"=>"e", "c"=>"f", "d"=>"g", "e"=>"h", "f"=>"i",
-    "g"=>"j", "h"=>"k", "i"=>"l", "j"=>"m", "k"=>"n", "l"=>"o", "m"=>"p",
-    "n"=>"q", "o"=>"r", "p"=>"s", "q"=>"t", "r"=>"u", "s"=>"v", "t"=>"w",
-    "u"=>"x", "v"=>"y", "w"=>"z", "x"=>" ", "y"=>"a", "z"=>"b", " "=>"c"}
-    assert_equal expected, @enigma.create_index_hash_for_c_characters
-  end
-
   def test_that_c_characters_are_changed
     @enigma.encrypt("hello world!", "00222", "071291")
     expected = ["n", "m", "o", "l", "u", "h", "z", "o", "x", "t", "g", "!"]
     assert_equal expected, @enigma.change_c_characters_in_message
-  end
-
-  def test_create_index_hash_for_d_characters
-    @enigma.encrypt("hello world!", "00222", "071291")
-    expected = {"a"=>"x", "b"=>"y", "c"=>"z", "d"=>" ", "e"=>"a", "f"=>"b",
-    "g"=>"c", "h"=>"d", "i"=>"e", "j"=>"f", "k"=>"g", "l"=>"h", "m"=>"i",
-    "n"=>"j", "o"=>"k", "p"=>"l", "q"=>"m", "r"=>"n", "s"=>"o", "t"=>"p",
-    "u"=>"q", "v"=>"r", "w"=>"s", "x"=>"t", "y"=>"u", "z"=>"v", " "=>"w"}
-    assert_equal expected, @enigma.create_index_hash_for_d_characters
   end
 
   def test_that_d_characters_are_changed
