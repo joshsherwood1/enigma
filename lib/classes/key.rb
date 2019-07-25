@@ -6,7 +6,7 @@ class Key
   end
 
   def generate_random_key
-    rand(0..99999).to_s.rjust(5, "0")
+    rand(1..99999).to_s.rjust(5, "0")
   end
 
   def generate_five_digits_with_user_given_key
@@ -16,7 +16,7 @@ class Key
   def determine_the_key_to_use
     if @user_given_key == ""
       generate_random_key
-    else @user_given_key.nil? == false
+    else
       generate_five_digits_with_user_given_key
     end
   end
