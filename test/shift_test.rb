@@ -25,9 +25,18 @@ class ShiftTest < Minitest::Test
 
   def test_make_shift_from_key_and_offset
     @key_1.determine_the_key_to_use
+    @key_1.stubs(:determine_the_key_to_use).returns("56789")
     key_hash = @key_1.assign_letters_to_digits
     @offset_1.determine_the_offset_to_use
+    @offset_1.stubs(:determine_the_offset_to_use).returns("6961")
     offset_hash = @offset_1.assign_letters_to_offset_digits
-    assert_equal ({A: "a"}), @shift_1.make_shift_from_key_and_offset(key_hash, offset_hash)
+    @key_2.determine_the_key_to_use
+    key_hash_2 = @key_2.assign_letters_to_digits
+    @offset_2.determine_the_offset_to_use
+    offset_hash_2 = @offset_2.assign_letters_to_offset_digits
+    expected = {:A=>62, :B=>76, :C=>84, :D=>90}
+    expected_2 = {:A=>6, :B=>8, :C=>30, :D=>23}
+    assert_equal expected, @shift_1.make_shift_from_key_and_offset(key_hash, offset_hash)
+    assert_equal expected_2, @shift_2.make_shift_from_key_and_offset(key_hash_2, offset_hash_2)
   end
 end
