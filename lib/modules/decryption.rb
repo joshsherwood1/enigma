@@ -11,4 +11,8 @@ module Decryption
   def create_rotated_character_set_b_for_decryption
     create_character_set.rotate(-(@shift[:B]))
   end
+
+  def create_rotated_character_set_c_for_decryption
+    create_character_set.rotate(-(@shift[:C]))
+  end
 end
