@@ -14,8 +14,9 @@ module Decryption
     Hash[create_character_set_for_decryption.zip(b_rotated_character_set)]
   end
 
-  def create_rotated_character_set_c_for_decryption
-    create_character_set.rotate(-(@shift[:C]))
+  def create_rotated_character_set_c_hash_for_decryption
+    c_rotated_character_set = create_character_set.rotate(-(@shift[:C]))
+    Hash[create_character_set_for_decryption.zip(c_rotated_character_set)]
   end
 
   def create_rotated_character_set_d_for_decryption
