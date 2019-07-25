@@ -44,13 +44,6 @@ class ShiftTest < Minitest::Test
     assert_equal expected_2, @shift_2.make_shift_from_key_and_offset
   end
 
-  def test_create_character_set
-    expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
-    "x", "y", "z", " "]
-    assert_equal expected, @shift_1.create_character_set
-  end
-
   def test_assign_letters_to_key_digits
     expected = {:A=>56, :B=>67, :C=>78, :D=>89}
     expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}

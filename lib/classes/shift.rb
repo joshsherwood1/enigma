@@ -28,8 +28,4 @@ class Shift
   def make_shift_from_key_and_offset
     @official_shift = assign_letters_to_key_digits.merge!(assign_letters_to_offset_digits) {|letter, digit_1, digit_2| digit_1 + digit_2 }
   end
-
-  def create_character_set
-    ("a".."z").to_a << " "
-  end
 end

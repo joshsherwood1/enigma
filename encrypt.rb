@@ -1,3 +1,8 @@
+require './lib/classes/key'
+require './lib/classes/offset'
+require './lib/classes/shift'
+require './lib/classes/enigma'
+
 message = File.open(ARGV[0], "r")
 incoming_message = message.read
 message.close
