@@ -21,8 +21,6 @@ class OffsetTest < Minitest::Test
   def test_that_it_has_attributes
     assert_equal "", @offset_1.user_given_date
     assert_equal "071291", @offset_2.user_given_date
-    assert_nil @offset_1.four_digit_offset
-    assert_nil @offset_2.four_digit_offset
   end
 
   def test_that_it_makes_current_date
@@ -38,13 +36,5 @@ class OffsetTest < Minitest::Test
     @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
     assert_equal "6961", @offset_1.determine_the_offset_to_use
     assert_equal "6681", @offset_2.determine_the_offset_to_use
-  end
-
-  def test_that_offset_now_has_attribute_four_digit_offset
-    @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-    @offset_1.determine_the_offset_to_use
-    @offset_2.determine_the_offset_to_use
-    assert_equal "6961", @offset_1.four_digit_offset
-    assert_equal "6681", @offset_2.four_digit_offset
   end
 end

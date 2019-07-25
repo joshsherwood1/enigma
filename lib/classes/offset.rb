@@ -1,11 +1,10 @@
 require 'date'
 
 class Offset
-  attr_reader :user_given_date, :four_digit_offset
+  attr_reader :user_given_date
 
   def initialize(user_given_date)
     @user_given_date = user_given_date
-    @four_digit_offset = nil
   end
 
   def make_offset_based_off_of_current_date
@@ -23,9 +22,9 @@ class Offset
 
   def determine_the_offset_to_use
     if @user_given_date == ""
-      @four_digit_offset = make_offset_based_off_of_current_date
+      make_offset_based_off_of_current_date
     else
-      @four_digit_offset = make_offset_based_off_of_user_given_date
+      make_offset_based_off_of_user_given_date
     end
   end
 end
