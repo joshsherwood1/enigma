@@ -11,8 +11,12 @@ require 'mocha/minitest'
 class ShiftTest < Minitest::Test
   def setup
     @key_1 = Key.new("")
+    @key_1.generate_random_key
+    @key_1.stubs(:generate_random_key).returns("56789")
     @key_2 = Key.new("222")
     @offset_1 = Offset.new("")
+    @offset_1.make_offset_based_off_of_current_date
+    @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
     @offset_2 = Offset.new("071291")
     @shift_1 = Shift.new(@key_1, @offset_1)
     @shift_2 = Shift.new(@key_2, @offset_2)
@@ -23,7 +27,9 @@ class ShiftTest < Minitest::Test
   end
 
   def test_that_it_has_attributes
+    assert_equal @key_1, @shift_1.key
     assert_equal @key_2, @shift_2.key
+    assert_equal @offset_1, @shift_1.offset
     assert_equal @offset_2, @shift_2.offset
   end
 
@@ -42,31 +48,26 @@ class ShiftTest < Minitest::Test
     assert_equal expected, @shift_1.create_character_set
   end
 
-  def test_rotate_character_set_based_on_key_symbol
-    shift = @shift_2.make_shift_from_key_and_offset
-    expected = ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
-    "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b",
-    "c", "d", "e", "f"]
-    expected_2 = ["x", "y", "z", " ", "a", "b", "c", "d", "e", "f", "g", "h",
-    "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-    "t", "u", "v", "w"]
-    assert_equal expected, @shift_2.rotate_character_set(shift[:A])
-    assert_equal expected_2, @shift_2.rotate_character_set(shift[:D])
+  def test_make_key
+    assert_equal "00222", @shift_2.make_key
+  end
+
+  def test_make_offset
+    assert_equal "6681", @shift_2.make_offset
   end
 
   def test_assign_letters_to_key_digits
-    @key_1.stubs(:generate_random_key).returns("56789")
     expected = {:A=>56, :B=>67, :C=>78, :D=>89}
     expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}
-    assert_equal expected, @key_1.assign_letters_to_digits
-    assert_equal expected_2, @key_2.assign_letters_to_digits
+    assert_equal expected, @shift_1.assign_letters_to_key_digits
+    assert_equal expected_2, @shift_2.assign_letters_to_key_digits
   end
-
+  #
   def test_assign_letters_to_offset_digits
-    expected = {A: 6, B: 9, C: 6, D: 1}
+    expected = {:A=>6, :B=>9, :C=>6, :D=>1}
     expected_2 = {A: 6, B: 6, C: 8, D: 1}
-    assert_equal expected, @offset_1.assign_letters_to_offset_digits
-    assert_equal expected_2, @offset_2.assign_letters_to_offset_digits
+    assert_equal expected, @shift_1.assign_letters_to_offset_digits
+    assert_equal expected_2, @shift_2.assign_letters_to_offset_digits
   end
 
   # def test_create_rotated_character_sets
