@@ -8,6 +8,11 @@ class Offset
     @four_digit_offset = nil
   end
 
+  def make_current_date_into_string
+    current_date = DateTime.now
+    current_date_integer = current_date.strftime("%d%m%y").to_s
+  end
+
   def make_offset_based_off_of_current_date
     current_date = DateTime.now
     current_date_integer = current_date.strftime("%d%m%y").to_i

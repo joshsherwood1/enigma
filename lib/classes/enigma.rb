@@ -1,5 +1,9 @@
 require 'date'
 require './lib/modules/decryption'
+require './lib/classes/key'
+require './lib/classes/offset'
+require './lib/classes/shift'
+require './lib/classes/enigma'
 
 class Enigma
   include Decryption
@@ -38,10 +42,11 @@ class Enigma
     @message.split("")
   end
 
-  def encrypt(message, key = @key_object.four_digit_offset, date = @offset_object)
+  def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
     @message = message
-    # if key != @key_digits
-    #   key =
+    five_digit_key = key.rjust(5, "0")
+    date_squared = (date.to_i ** 2).to_s
+    offset = date_squared.chars.last(4).join
     create_rotated_character_set_a
     create_rotated_character_set_b
     create_rotated_character_set_c
@@ -58,7 +63,7 @@ class Enigma
     convert_encrypted_array_to_string
     hash = {
     encryption: convert_encrypted_array_to_string,
-    key: key,
+    key: five_digit_key,
     date: date
     }
     @encrypted_text = hash[:encryption]

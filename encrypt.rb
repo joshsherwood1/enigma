@@ -26,6 +26,7 @@ message.close
 
 @enigma = Enigma.new(@shift_1.make_shift_from_key_and_offset, @key, @offset)
 @enigma.encrypt(incoming_message)
+binding.pry
 # @enigma.create_rotated_character_set_a
 @enigma.encrypted_text
 # binding.pry
