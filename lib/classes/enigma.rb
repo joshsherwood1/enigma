@@ -48,16 +48,15 @@ class Enigma
   }
   end
 
-  def recreate_index_hash_with_a_characters
+  def create_index_hash_for_a_characters
     Hash[create_character_set.zip(create_rotated_character_set_a)]
-    # table = Hash[create_rotated_character_set_a.map.with_index { |letter, index| [letter, index] }]
   end
 
-  def create_index_hash_with_message
+  def change_a_characters_in_message
     create_array_from_message.map!.with_index do |letter, index|
-      if recreate_index_hash_with_a_characters.keys.include?(letter) == true
-        index % 4 == 0 ? recreate_index_hash_with_a_characters[letter] : letter
-      else recreate_index_hash_with_a_characters.keys.include?(letter) == false
+      if create_index_hash_for_a_characters.keys.include?(letter) == true
+        index % 4 == 0 ? create_index_hash_for_a_characters[letter] : letter
+      else create_index_hash_for_a_characters.keys.include?(letter) == false
         index % 4 == 0 ? letter : letter
       end
     end
