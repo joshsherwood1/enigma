@@ -12,12 +12,17 @@ require 'mocha/minitest'
 class OffsetTest < Minitest::Test
 
   def setup
-    @offset_1 = Offset.new
-    @offset_2 = Offset.new
+    @offset_1 = Offset.new("")
+    @offset_2 = Offset.new("071291")
   end
 
   def test_that_it_exists
     assert_instance_of Offset, @offset_1
+  end
+
+  def test_that_it_has_attributes
+    assert_equal "", @offset_1.user_given_date
+    assert_equal "071291", @offset_2.user_given_date
   end
 
   def test_that_it_makes_current_date
