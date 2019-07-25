@@ -47,7 +47,7 @@ class Enigma
     @message = message
     date = @offset_object.user_given_date
     @key_object.make_key(key)
-    binding.pry
+    @offset_object.make_offset(date)
     date_squared = (date.to_i ** 2).to_s
     offset = date_squared.chars.last(4).join
     create_rotated_character_set_a
