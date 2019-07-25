@@ -60,4 +60,10 @@ class DecryptionTest < Minitest::Test
     "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b", "c", "d"]
     assert_equal expected, @enigma.create_rotated_character_set_d_for_decryption
   end
+
+  def test_create_array_of_individual_characters_from_encrypted_message
+    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    expected = ["n", "m", "o", "h", "u", "h", "z", "k", "x", "t", "g", "!"]
+    assert_equal expected, @enigma.create_array_from_encrypted_message
+  end
 end

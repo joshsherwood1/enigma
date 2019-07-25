@@ -120,7 +120,7 @@ class Enigma
   # end
 
   def decrypt(ciphertext, key, date)
-    @message = message
+    @message = ciphertext
     current_date = DateTime.now
     current_date_string = current_date.strftime("%d%m%y").to_s
     if date.nil? == true || date == ""

@@ -19,4 +19,8 @@ module Decryption
   def create_rotated_character_set_d_for_decryption
     create_character_set.rotate(-(@shift[:D]))
   end
+
+  def create_array_from_encrypted_message
+    @message.split("")
+  end
 end
