@@ -29,11 +29,17 @@ class DecryptionTest < Minitest::Test
       @shift_2.make_shift_from_key_and_offset
       @enigma = Enigma.new(@shift_2.official_shift)
   end
-  
+
   def test_create_character_set_for_decryption
     expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
     "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
     "x", "y", "z", " "]
     assert_equal expected, @enigma.create_character_set_for_decryption
+  end
+
+  def test_create_rotated_character_set_a_for_decryption
+    expected = ["v", "w", "x", "y", "z", " ", "a", "b", "c", "d", "e", "f",
+    "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u"]
+    assert_equal expected, @enigma.create_rotated_character_set_a_for_decryption
   end
 end
