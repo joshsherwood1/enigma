@@ -27,4 +27,14 @@ module Decryption
   def create_array_from_encrypted_message
     @ciphertext.split("")
   end
+
+  def change_a_characters_in_message_decryption
+    create_array_from_encrypted_message.map!.with_index do |letter, index|
+      if create_rotated_character_set_a_hash_for_decryption.keys.include?(letter) == true
+        index % 4 == 0 ? create_rotated_character_set_a_hash_for_decryption[letter] : letter
+      else create_rotated_character_set_a_hash_for_decryption.keys.include?(letter) == false
+        index % 4 == 0 ? letter : letter
+      end
+    end
+  end
 end
