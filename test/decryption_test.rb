@@ -83,7 +83,13 @@ class DecryptionTest < Minitest::Test
 
   def test_that_b_characters_are_changed_decryption
     @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
-    expected = ["h", "m", "o", "h", "o", "h", "z", "k", "r", "t", "g", "!"]
+    expected = ["h", "e", "o", "h", "o", " ", "z", "k", "r", "l", "g", "!"]
     assert_equal expected, @enigma.change_b_characters_in_message_decryption
+  end
+
+  def test_that_c_characters_are_changed_decryption
+    @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
+    expected = ["h", "e", "l", "h", "o", " ", "w", "k", "r", "l", "d", "!"]
+    assert_equal expected, @enigma.change_c_characters_in_message_decryption
   end
 end
