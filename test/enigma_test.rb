@@ -54,36 +54,36 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.create_character_set
   end
 
-  def test_create_rotated_character_set_a
+  def test_create_shift_a_hash
     expected = {"a"=>"g", "b"=>"h", "c"=>"i", "d"=>"j", "e"=>"k", "f"=>"l",
     "g"=>"m", "h"=>"n", "i"=>"o", "j"=>"p", "k"=>"q", "l"=>"r", "m"=>"s",
     "n"=>"t", "o"=>"u", "p"=>"v", "q"=>"w", "r"=>"x", "s"=>"y", "t"=>"z",
     "u"=>" ", "v"=>"a", "w"=>"b", "x"=>"c", "y"=>"d", "z"=>"e", " "=>"f"}
-    assert_equal expected, @enigma.create_rotated_character_set_a
+    assert_equal expected, @enigma.create_shift_a_hash
   end
 
-  def test_create_rotated_character_set_b
+  def test_create_shift_b_hash
     expected = {"a"=>"i", "b"=>"j", "c"=>"k", "d"=>"l", "e"=>"m", "f"=>"n",
     "g"=>"o", "h"=>"p", "i"=>"q", "j"=>"r", "k"=>"s", "l"=>"t", "m"=>"u",
     "n"=>"v", "o"=>"w", "p"=>"x", "q"=>"y", "r"=>"z", "s"=>" ", "t"=>"a",
     "u"=>"b", "v"=>"c", "w"=>"d", "x"=>"e", "y"=>"f", "z"=>"g", " "=>"h"}
-    assert_equal expected, @enigma.create_rotated_character_set_b
+    assert_equal expected, @enigma.create_shift_b_hash
   end
 
-  def test_create_rotated_character_set_c
+  def test_create_shift_c_hash
     expected = {"a"=>"d", "b"=>"e", "c"=>"f", "d"=>"g", "e"=>"h", "f"=>"i",
     "g"=>"j", "h"=>"k", "i"=>"l", "j"=>"m", "k"=>"n", "l"=>"o", "m"=>"p",
     "n"=>"q", "o"=>"r", "p"=>"s", "q"=>"t", "r"=>"u", "s"=>"v", "t"=>"w",
     "u"=>"x", "v"=>"y", "w"=>"z", "x"=>" ", "y"=>"a", "z"=>"b", " "=>"c"}
-    assert_equal expected, @enigma.create_rotated_character_set_c
+    assert_equal expected, @enigma.create_shift_c_hash
   end
 
-  def test_create_rotated_character_set_d
+  def test_create_shift_d_hash
     expected = {"a"=>"x", "b"=>"y", "c"=>"z", "d"=>" ", "e"=>"a", "f"=>"b",
     "g"=>"c", "h"=>"d", "i"=>"e", "j"=>"f", "k"=>"g", "l"=>"h", "m"=>"i",
     "n"=>"j", "o"=>"k", "p"=>"l", "q"=>"m", "r"=>"n", "s"=>"o", "t"=>"p",
     "u"=>"q", "v"=>"r", "w"=>"s", "x"=>"t", "y"=>"u", "z"=>"v", " "=>"w"}
-    assert_equal expected, @enigma.create_rotated_character_set_d
+    assert_equal expected, @enigma.create_shift_d_hash
   end
 
   def test_that_it_can_encrypt
