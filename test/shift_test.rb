@@ -54,12 +54,19 @@ class ShiftTest < Minitest::Test
     assert_equal expected_2, @shift_2.rotate_character_set(shift[:D])
   end
 
-  def test_assign_letters_to_digits
+  def test_assign_letters_to_key_digits
     @key_1.stubs(:generate_random_key).returns("56789")
     expected = {:A=>56, :B=>67, :C=>78, :D=>89}
     expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}
     assert_equal expected, @key_1.assign_letters_to_digits
     assert_equal expected_2, @key_2.assign_letters_to_digits
+  end
+
+  def test_assign_letters_to_offset_digits
+    expected = {A: 6, B: 9, C: 6, D: 1}
+    expected_2 = {A: 6, B: 6, C: 8, D: 1}
+    assert_equal expected, @offset_1.assign_letters_to_offset_digits
+    assert_equal expected_2, @offset_2.assign_letters_to_offset_digits
   end
 
   # def test_create_rotated_character_sets

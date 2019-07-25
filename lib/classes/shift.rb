@@ -22,12 +22,21 @@ class Shift
     create_character_set.rotate(rotation_number)
   end
 
-  def assign_letters_to_digits
+  def assign_letters_to_key_digits
     key_letter_hash = Hash.new(0)
     key_letter_hash[:A] = determine_the_key_to_use[0..1].to_i
     key_letter_hash[:B] = determine_the_key_to_use[1..2].to_i
     key_letter_hash[:C] = determine_the_key_to_use[2..3].to_i
     key_letter_hash[:D] = determine_the_key_to_use[3..4].to_i
+    key_letter_hash
+  end
+
+  def assign_letters_to_offset_digits
+    key_letter_hash = Hash.new(0)
+    key_letter_hash[:A] = determine_the_offset_to_use[0].to_i
+    key_letter_hash[:B] = determine_the_offset_to_use[1].to_i
+    key_letter_hash[:C] = determine_the_offset_to_use[2].to_i
+    key_letter_hash[:D] = determine_the_offset_to_use[3].to_i
     key_letter_hash
   end
 end
