@@ -5,7 +5,6 @@ require './lib/classes/enigma'
 require './lib/classes/key'
 require './lib/classes/offset'
 require './lib/classes/shift'
-require 'csv'
 require 'pry'
 require 'mocha/minitest'
 

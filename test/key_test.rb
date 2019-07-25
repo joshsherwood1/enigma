@@ -3,7 +3,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/classes/enigma'
 require './lib/classes/key'
-require 'csv'
 require 'pry'
 require 'mocha/minitest'
 
