@@ -39,4 +39,9 @@ class OffsetTest < Minitest::Test
     assert_equal "6961", @offset_1.determine_the_offset_to_use
     assert_equal "6681", @offset_2.determine_the_offset_to_use
   end
+
+  def test_assign_letters_to_offset_digits
+    assert_equal ({A: "22"}), @offset_1.assign_letters_to_offset_digits
+    assert_equal ({A: "22"}), @offset_2.assign_letters_to_offset_digits
+  end
 end
