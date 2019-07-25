@@ -69,13 +69,4 @@ class ShiftTest < Minitest::Test
     assert_equal expected, @shift_1.assign_letters_to_offset_digits
     assert_equal expected_2, @shift_2.assign_letters_to_offset_digits
   end
-
-  # def test_create_rotated_character_sets
-  #   @key_2.determine_the_key_to_use
-  #   key_hash_2 = @key_2.assign_letters_to_digits
-  #   @offset_2.determine_the_offset_to_use
-  #   offset_hash_2 = @offset_2.assign_letters_to_offset_digits
-  #   shift = @shift_2.make_shift_from_key_and_offset(key_hash_2, offset_hash_2)
-  #   assert_equal [], @shift_2.create_rotated_character_sets
-  # end
 end
