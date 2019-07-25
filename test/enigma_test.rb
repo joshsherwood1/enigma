@@ -67,6 +67,13 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.create_rotated_character_set_c
   end
 
+  def test_create_rotated_character_set_d
+    expected = ["x", "y", "z", " ", "a", "b", "c", "d", "e", "f", "g", "h",
+    "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+    "t", "u", "v", "w"]
+    assert_equal expected, @enigma.create_rotated_character_set_d
+  end
+
   # def test_that_it_can_encrypt
   #   assert_equal "aaa", @enigma.encrypt(message, key, date)
   # end
