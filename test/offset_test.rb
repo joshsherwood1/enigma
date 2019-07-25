@@ -21,10 +21,13 @@ class OffsetTest < Minitest::Test
   def test_that_it_has_attributes
     assert_nil @offset_1.four_digit_offset
     assert_nil @offset_2.four_digit_offset
+    assert_nil @offset_1.chosen_date
     @offset_1.make_offset("290719")
     @offset_2.make_offset("100493")
     assert_equal "6961", @offset_1.four_digit_offset
     assert_equal "3049", @offset_2.four_digit_offset
+    assert_equal "290719", @offset_1.chosen_date
+    assert_equal "100493", @offset_2.chosen_date
   end
 
   def test_that_four_digit_offset_attribute_now_has_offset
