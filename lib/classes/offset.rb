@@ -19,4 +19,12 @@ class Offset
     user_date_squared = (user_date_integer ** 2).to_s
     user_date_squared.chars.last(4).join
   end
+
+  def determine_the_offset_to_use
+    if @user_given_date == ""
+      make_offset_based_off_of_current_date
+    else
+      make_offset_based_off_of_user_given_date
+    end
+  end
 end
