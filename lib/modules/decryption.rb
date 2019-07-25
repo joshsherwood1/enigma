@@ -67,4 +67,8 @@ module Decryption
       end
     end
   end
+
+  def convert_decrypted_array_to_string
+    change_d_characters_in_message_decryption.join("").to_s
+  end
 end
