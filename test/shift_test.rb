@@ -45,4 +45,20 @@ class ShiftTest < Minitest::Test
     "x", "y", "z", " "]
     assert_equal expected, @shift_1.create_character_set
   end
+
+  def test_rotate_character_set_based_on_key_symbol
+    @key_2.determine_the_key_to_use
+    key_hash_2 = @key_2.assign_letters_to_digits
+    @offset_2.determine_the_offset_to_use
+    offset_hash_2 = @offset_2.assign_letters_to_offset_digits
+    shift = @shift_2.make_shift_from_key_and_offset(key_hash_2, offset_hash_2)
+    expected = ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+    "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b",
+    "c", "d", "e", "f"]
+    expected_2 = ["x", "y", "z", " ", "a", "b", "c", "d", "e", "f", "g", "h",
+    "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+    "t", "u", "v", "w"]
+    assert_equal expected, @shift_2.rotate_character_set(shift[:A])
+    assert_equal expected_2, @shift_2.rotate_character_set(shift[:D])
+  end
 end
