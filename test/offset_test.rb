@@ -19,4 +19,8 @@ class OffsetTest < Minitest::Test
   def test_that_it_exists
     assert_instance_of Offset, @offset_1
   end
+
+  def test_that_it_makes_current_date
+    assert_equal "July 27, 2019", @offset_1.make_current_date
+  end
 end
