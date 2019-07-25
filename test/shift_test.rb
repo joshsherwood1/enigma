@@ -41,7 +41,7 @@ class ShiftTest < Minitest::Test
     assert_equal expected, @shift_1.assign_letters_to_key_digits
     assert_equal expected_2, @shift_2.assign_letters_to_key_digits
   end
-  #
+  
   def test_assign_letters_to_offset_digits
     expected = {:A=>0, :B=>9, :C=>6, :D=>1}
     expected_2 = {:A=>5, :B=>4, :C=>5, :D=>6}
