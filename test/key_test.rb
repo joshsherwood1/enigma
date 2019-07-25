@@ -25,12 +25,12 @@ class KeyTest < Minitest::Test
   end
 
   def test_generate_random_number
-    @key_1.generate_random_key
     @key_1.stubs(:generate_random_key).returns("12345")
     assert_equal "12345", @key_1.generate_random_key
   end
 
   def test_that_random_or_user_key_is_chosen
+    @key_1.generate_random_key
     @key_1.stubs(:generate_random_key).returns("56789")
     assert_equal "56789", @key_1.determine_the_key_to_use
     assert_equal "00222", @key_2.determine_the_key_to_use

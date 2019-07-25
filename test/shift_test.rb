@@ -11,11 +11,9 @@ require 'mocha/minitest'
 class ShiftTest < Minitest::Test
   def setup
     @key_1 = Key.new("")
-    @key_1.generate_random_key
     @key_1.stubs(:generate_random_key).returns("56789")
     @key_2 = Key.new("222")
     @offset_1 = Offset.new("")
-    @offset_1.make_offset_based_off_of_current_date
     @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
     @offset_2 = Offset.new("071291")
     @key_1.determine_the_key_to_use

@@ -35,6 +35,7 @@ class OffsetTest < Minitest::Test
   end
 
   def test_determine_to_use_current_date_or_user_date_offset
+    @offset_1.make_offset_based_off_of_current_date
     @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
     assert_equal "6961", @offset_1.determine_the_offset_to_use
     assert_equal "6681", @offset_2.determine_the_offset_to_use
