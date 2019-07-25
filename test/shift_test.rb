@@ -18,6 +18,10 @@ class ShiftTest < Minitest::Test
     @offset_1.make_offset_based_off_of_current_date
     @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
     @offset_2 = Offset.new("071291")
+    @key_1.determine_the_key_to_use
+    @offset_1.determine_the_offset_to_use
+    @key_2.determine_the_key_to_use
+    @offset_2.determine_the_offset_to_use
     @shift_1 = Shift.new(@key_1, @offset_1)
     @shift_2 = Shift.new(@key_2, @offset_2)
   end
@@ -34,7 +38,6 @@ class ShiftTest < Minitest::Test
   end
 
   def test_make_shift_from_key_and_offset
-
     expected = {:A=>62, :B=>76, :C=>84, :D=>90}
     expected_2 = {:A=>6, :B=>8, :C=>30, :D=>23}
     assert_equal expected, @shift_1.make_shift_from_key_and_offset
@@ -46,14 +49,6 @@ class ShiftTest < Minitest::Test
     "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
     "x", "y", "z", " "]
     assert_equal expected, @shift_1.create_character_set
-  end
-
-  def test_make_key
-    assert_equal "00222", @shift_2.make_key
-  end
-
-  def test_make_offset
-    assert_equal "6681", @shift_2.make_offset
   end
 
   def test_assign_letters_to_key_digits
