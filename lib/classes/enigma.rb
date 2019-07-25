@@ -13,7 +13,7 @@ class Enigma
   end
 
   def create_rotated_character_set_a
-    # create_character_set.rotate()
+    create_character_set.rotate(@shift[:A])
   end
 
   def encrypt(message, key, date)
