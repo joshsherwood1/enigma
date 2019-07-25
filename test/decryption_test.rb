@@ -27,7 +27,7 @@ class DecryptionTest < Minitest::Test
       @shift_2.assign_letters_to_key_digits
       @shift_2.assign_letters_to_offset_digits
       @shift_2.make_shift_from_key_and_offset
-      @enigma = Enigma.new(@shift_2.official_shift)
+      @enigma = Enigma.new(@shift_2.official_shift, @key_2, @offset_2)
   end
 
   def test_create_character_set_for_decryption
