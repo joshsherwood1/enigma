@@ -20,6 +20,8 @@ class KeyTest < Minitest::Test
   def test_that_it_has_attributes
     assert_equal "", @key_1.user_given_key
     assert_equal "222", @key_2.user_given_key
+    assert_nil @key_1.five_digit_key
+    assert_nil @key_2.five_digit_key
   end
 
   def test_generate_random_number
@@ -31,5 +33,13 @@ class KeyTest < Minitest::Test
     @key_1.stubs(:generate_random_key).returns("56789")
     assert_equal "56789", @key_1.determine_the_key_to_use
     assert_equal "00222", @key_2.determine_the_key_to_use
+  end
+
+  def test_that_attribute_five_digit_key_now_has_key
+    @key_1.stubs(:generate_random_key).returns("56789")
+    @key_1.determine_the_key_to_use
+    @key_2.determine_the_key_to_use
+    assert_equal "56789", @key_1.five_digit_key
+    assert_equal "00222", @key_2.five_digit_key
   end
 end
