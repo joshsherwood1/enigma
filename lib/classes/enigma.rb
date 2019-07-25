@@ -28,6 +28,10 @@ class Enigma
     create_character_set.rotate(@shift[:D])
   end
 
+  def create_array_from_message
+    @message.split("")
+  end
+
   def encrypt(message, key, date)
     @message = message
     current_date = DateTime.now
