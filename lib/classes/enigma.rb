@@ -3,13 +3,15 @@ require './lib/modules/decryption'
 
 class Enigma
   include Decryption
-  attr_reader :message, :shift, :ciphertext, :encrypted_text
+  attr_reader :message, :shift, :ciphertext, :encrypted_text, :key_object, :offset_object
 
-  def initialize(shift)
+  def initialize(shift, key_object, offset_object)
     @message = nil
     @shift = shift
     @ciphertext = nil
     @encrypted_text = nil
+    @key_object = key_object
+    @offset_object = offset_object
   end
 
   def create_character_set
@@ -36,8 +38,10 @@ class Enigma
     @message.split("")
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message, key = @key_object.four_digit_offset, date = @offset_object)
     @message = message
+    # if key != @key_digits
+    #   key =
     create_rotated_character_set_a
     create_rotated_character_set_b
     create_rotated_character_set_c
@@ -145,4 +149,5 @@ class Enigma
     date: chosen_date
   }
   end
+
 end

@@ -24,8 +24,8 @@ message.close
 @shift_1.assign_letters_to_offset_digits
 @shift_1.make_shift_from_key_and_offset
 
-@enigma = Enigma.new(@shift_1.make_shift_from_key_and_offset)
-@enigma.encrypt(incoming_message, @key.five_digit_key, current_date_string)
+@enigma = Enigma.new(@shift_1.make_shift_from_key_and_offset, @key, @offset)
+@enigma.encrypt(incoming_message)
 # @enigma.create_rotated_character_set_a
 @enigma.encrypted_text
 # binding.pry

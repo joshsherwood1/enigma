@@ -41,6 +41,11 @@ class EnigmaTest < Minitest::Test
     @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
     assert_equal "hello world!", @enigma.message
     assert_equal "nmohuhzkxtg!", @enigma.encrypted_text
+    assert_nil @enigma.key_object
+    assert_nil @enigma.offset_object
+    @enigma.add_default_key_and_offset(@key_1, @offset_1)
+    assert_equal @key_1, @enigma.key_object
+    assert_equal @offset_1, @enigma.offset_object
   end
 
   def test_create_character_set
