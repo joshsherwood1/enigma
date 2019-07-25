@@ -137,6 +137,21 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.change_c_characters_in_message
   end
 
+  def test_create_index_hash_for_d_characters
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    expected = {"a"=>"x", "b"=>"y", "c"=>"z", "d"=>" ", "e"=>"a", "f"=>"b",
+    "g"=>"c", "h"=>"d", "i"=>"e", "j"=>"f", "k"=>"g", "l"=>"h", "m"=>"i",
+    "n"=>"j", "o"=>"k", "p"=>"l", "q"=>"m", "r"=>"n", "s"=>"o", "t"=>"p",
+    "u"=>"q", "v"=>"r", "w"=>"s", "x"=>"t", "y"=>"u", "z"=>"v", " "=>"w"}
+    assert_equal expected, @enigma.create_index_hash_for_d_characters
+  end
+
+  def test_that_d_characters_are_changed
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    expected = ["n", "m", "o", "h", "u", "h", "z", "k", "x", "t", "g", "!"]
+    assert_equal expected, @enigma.change_d_characters_in_message
+  end
+
   #
   # def test_that_it_can_decrypt
   #   assert_equal "bbb", @enigma.decrypt(ciphertext, key, date)

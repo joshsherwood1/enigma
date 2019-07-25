@@ -90,6 +90,20 @@ class Enigma
     end
   end
 
+  def create_index_hash_for_d_characters
+    Hash[create_character_set.zip(create_rotated_character_set_d)]
+  end
+
+  def change_d_characters_in_message
+    change_c_characters_in_message.map!.with_index do |letter, index|
+      if create_index_hash_for_d_characters.keys.include?(letter) == true
+        (index + 1) % 4 == 0 ? create_index_hash_for_d_characters[letter] : letter
+      else create_index_hash_for_d_characters.keys.include?(letter) == false
+        (index + 1) % 4 == 0 ? letter : letter
+      end
+    end
+  end
+
 
 
   # def recreate_message_with_a_characters_changed
