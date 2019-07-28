@@ -1,10 +1,8 @@
 require './test/test_helper'
-gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/classes/enigma'
 require './lib/classes/key'
-require 'csv'
 require 'pry'
 require 'mocha/minitest'
 
@@ -37,8 +35,8 @@ class KeyTest < Minitest::Test
 
   def test_assign_letters_to_digits
     @key_1.stubs(:generate_random_key).returns("56789")
-    expected = {:A=>"56", :B=>"67", :C=>"78", :D=>"89"}
-    expected_2 = {:A=>"00", :B=>"02", :C=>"22", :D=>"22"}
+    expected = {:A=>56, :B=>67, :C=>78, :D=>89}
+    expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}
     assert_equal expected, @key_1.assign_letters_to_digits
     assert_equal expected_2, @key_2.assign_letters_to_digits
   end

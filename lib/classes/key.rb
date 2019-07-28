@@ -23,10 +23,10 @@ class Key
 
   def assign_letters_to_digits
     key_letter_hash = Hash.new(0)
-    key_letter_hash[:A] = determine_the_key_to_use[0..1]
-    key_letter_hash[:B] = determine_the_key_to_use[1..2]
-    key_letter_hash[:C] = determine_the_key_to_use[2..3]
-    key_letter_hash[:D] = determine_the_key_to_use[3..4]
+    key_letter_hash[:A] = determine_the_key_to_use[0..1].to_i
+    key_letter_hash[:B] = determine_the_key_to_use[1..2].to_i
+    key_letter_hash[:C] = determine_the_key_to_use[2..3].to_i
+    key_letter_hash[:D] = determine_the_key_to_use[3..4].to_i
     key_letter_hash
   end
 end

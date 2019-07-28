@@ -1,9 +1,7 @@
 require './test/test_helper'
-gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/classes/enigma'
-require 'csv'
 require 'pry'
 
 class EnigmaTest < Minitest::Test
