@@ -11,48 +11,13 @@ message = File.open(ARGV[0], "r")
 incoming_message = message.read.chomp.downcase
 message.close
 
-@key = Key.new("")
-@key.determine_the_key_to_use
-@key.five_digit_key
-
-@offset = Offset.new("")
-@offset.determine_the_offset_to_use
-@offset.four_digit_offset
-
-@shift_1 = Shift.new(@key, @offset)
-@shift_1.assign_letters_to_key_digits
-@shift_1.assign_letters_to_offset_digits
-@shift_1.make_shift_from_key_and_offset
-
-@enigma = Enigma.new(@shift_1.make_shift_from_key_and_offset)
-@enigma.encrypt(incoming_message, @key.five_digit_key, current_date_string)
-# @enigma.create_rotated_character_set_a
-@enigma.encrypted_text
+enigma = Enigma.new
+enigma.encrypt(incoming_message, "1234", "121256")
+enigma.encrypted_text
 # binding.pry
 
-#
-# puts "You are creating a cipher using the enigma machine. Please enter a key for the cipher:"
-# user_key = gets.chomp
-
-capitalized_message = @enigma.encrypted_text
+capitalized_message = enigma.encrypted_text
 writer = File.open(ARGV[1], "w")
 writer.write(capitalized_message)
 writer.close
-puts "Created '#{ARGV[1]}' with the key #{@key.five_digit_key} and date #{current_date_string}"
-# time1 = Time.new
-# puts "Current Time : " + time1.inspect
-
-# message1 = File.open(ARGV[0], "w")
-# writer.write(message1)
-# writer.close
-
-# File.write('message.txt', user_message)
-
-# message = File.open(ARGV[0], "r")
-# incoming_message = message.read
-# message.close
-# capitalized_message = incoming_message.downcase
-# writer = File.open(ARGV[1], "w")
-# writer.write(capitalized_message)
-# writer.close
-# puts "Created '#{ARGV[1]}' with the key .... and date ..."
+puts "Created '#{ARGV[1]}' with the key #{enigma.key_object.five_digit_key} and date #{enigma.offset_object.chosen_date}"

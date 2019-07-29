@@ -12,22 +12,16 @@ require 'mocha/minitest'
 class DecryptionTest < Minitest::Test
 
   def setup
-      @key_1 = Key.new("")
-      @key_1.stubs(:generate_random_key).returns("56789")
-      @key_2 = Key.new("222")
-      @offset_1 = Offset.new("")
-      @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-      @offset_2 = Offset.new("071291")
-      @key_1.determine_the_key_to_use
-      @offset_1.determine_the_offset_to_use
-      @key_2.determine_the_key_to_use
-      @offset_2.determine_the_offset_to_use
-      @shift_1 = Shift.new(@key_1, @offset_1)
-      @shift_2 = Shift.new(@key_2, @offset_2)
-      @shift_2.assign_letters_to_key_digits
-      @shift_2.assign_letters_to_offset_digits
-      @shift_2.make_shift_from_key_and_offset
-      @enigma = Enigma.new(@shift_2.official_shift)
+    @key_2 = Key.new
+    @offset_2 = Offset.new
+    @key_2.make_key("222")
+    @offset_2.make_offset("071291")
+    @shift_2 = Shift.new(@key_2, @offset_2)
+    @shift_2.assign_letters_to_key_digits
+    @shift_2.assign_letters_to_offset_digits
+    @shift_2.make_shift_from_key_and_offset
+    @enigma = Enigma.new
+    @enigma.make_shift_the_official_shift(@shift_2)
   end
 
   def test_create_character_set_for_decryption

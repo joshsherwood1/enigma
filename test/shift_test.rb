@@ -10,16 +10,14 @@ require 'mocha/minitest'
 
 class ShiftTest < Minitest::Test
   def setup
-    @key_1 = Key.new("")
-    @key_1.stubs(:generate_random_key).returns("56789")
-    @key_2 = Key.new("222")
-    @offset_1 = Offset.new("")
-    @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-    @offset_2 = Offset.new("071291")
-    @key_1.determine_the_key_to_use
-    @offset_1.determine_the_offset_to_use
-    @key_2.determine_the_key_to_use
-    @offset_2.determine_the_offset_to_use
+    @key_1 = Key.new
+    @key_2 = Key.new
+    @offset_1 = Offset.new
+    @offset_2 = Offset.new
+    @key_1.make_key("123")
+    @offset_1.make_offset("091281")
+    @key_2.make_key("45999")
+    @offset_2.make_offset("161116")
     @shift_1 = Shift.new(@key_1, @offset_1)
     @shift_2 = Shift.new(@key_2, @offset_2)
   end
@@ -38,22 +36,22 @@ class ShiftTest < Minitest::Test
   end
 
   def test_make_shift_from_key_and_offset
-    expected = {:A=>62, :B=>76, :C=>84, :D=>90}
-    expected_2 = {:A=>6, :B=>8, :C=>30, :D=>23}
+    expected = {:A=>0, :B=>10, :C=>18, :D=>24}
+    expected_2 = {:A=>50, :B=>63, :C=>104, :D=>105}
     assert_equal expected, @shift_1.make_shift_from_key_and_offset
     assert_equal expected_2, @shift_2.make_shift_from_key_and_offset
   end
 
   def test_assign_letters_to_key_digits
-    expected = {:A=>56, :B=>67, :C=>78, :D=>89}
-    expected_2 = {:A=>0, :B=>2, :C=>22, :D=>22}
+    expected = {:A=>0, :B=>1, :C=>12, :D=>23}
+    expected_2 = {:A=>45, :B=>59, :C=>99, :D=>99}
     assert_equal expected, @shift_1.assign_letters_to_key_digits
     assert_equal expected_2, @shift_2.assign_letters_to_key_digits
   end
   #
   def test_assign_letters_to_offset_digits
-    expected = {:A=>6, :B=>9, :C=>6, :D=>1}
-    expected_2 = {A: 6, B: 6, C: 8, D: 1}
+    expected = {:A=>0, :B=>9, :C=>6, :D=>1}
+    expected_2 = {:A=>5, :B=>4, :C=>5, :D=>6}
     assert_equal expected, @shift_1.assign_letters_to_offset_digits
     assert_equal expected_2, @shift_2.assign_letters_to_offset_digits
   end
@@ -61,8 +59,8 @@ class ShiftTest < Minitest::Test
   def test_that_official_shift_has_shift
     @shift_1.make_shift_from_key_and_offset
     @shift_2.make_shift_from_key_and_offset
-    expected = {:A=>62, :B=>76, :C=>84, :D=>90}
-    expected_2 = {:A=>6, :B=>8, :C=>30, :D=>23}
+    expected = {:A=>0, :B=>10, :C=>18, :D=>24}
+    expected_2 = {:A=>50, :B=>63, :C=>104, :D=>105}
     assert_equal expected, @shift_1.official_shift
     assert_equal expected_2, @shift_2.official_shift
   end

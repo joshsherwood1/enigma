@@ -10,8 +10,8 @@ require 'mocha/minitest'
 class OffsetTest < Minitest::Test
 
   def setup
-    @offset_1 = Offset.new("")
-    @offset_2 = Offset.new("071291")
+    @offset_1 = Offset.new
+    @offset_2 = Offset.new
   end
 
   def test_that_it_exists
@@ -19,33 +19,24 @@ class OffsetTest < Minitest::Test
   end
 
   def test_that_it_has_attributes
-    assert_equal "", @offset_1.user_given_date
-    assert_equal "071291", @offset_2.user_given_date
     assert_nil @offset_1.four_digit_offset
     assert_nil @offset_2.four_digit_offset
-  end
-
-  def test_that_it_makes_current_date
-    @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-    assert_equal "6961", @offset_1.make_offset_based_off_of_current_date
-  end
-
-  def test_that_offset_is_made_with_user_given_date
-    assert_equal "6681", @offset_2.make_offset_based_off_of_user_given_date
-  end
-
-  def test_determine_to_use_current_date_or_user_date_offset
-    @offset_1.make_offset_based_off_of_current_date
-    @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-    assert_equal "6961", @offset_1.determine_the_offset_to_use
-    assert_equal "6681", @offset_2.determine_the_offset_to_use
+    assert_nil @offset_1.chosen_date
+    @offset_1.make_offset("290719")
+    @offset_2.make_offset("100493")
+    assert_equal "6961", @offset_1.four_digit_offset
+    assert_equal "3049", @offset_2.four_digit_offset
+    assert_equal "290719", @offset_1.chosen_date
+    assert_equal "100493", @offset_2.chosen_date
   end
 
   def test_that_four_digit_offset_attribute_now_has_offset
     @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-    @offset_1.determine_the_offset_to_use
-    @offset_2.determine_the_offset_to_use
-    assert_equal "6961", @offset_1.four_digit_offset
-    assert_equal "6681", @offset_2.four_digit_offset
+    assert_equal "6961", @offset_1.make_offset_based_off_of_current_date
+  end
+
+  def test_that_offset_is_made
+    assert_equal "6961", @offset_1.make_offset("290719")
+    assert_equal "3049", @offset_1.make_offset("100493")
   end
 end

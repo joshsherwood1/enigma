@@ -9,8 +9,8 @@ require 'mocha/minitest'
 class KeyTest < Minitest::Test
 
   def setup
-    @key_1 = Key.new("")
-    @key_2 = Key.new("222")
+    @key_1 = Key.new
+    @key_2 = Key.new
   end
 
   def test_that_it_exists
@@ -18,10 +18,12 @@ class KeyTest < Minitest::Test
   end
 
   def test_that_it_has_attributes
-    assert_equal "", @key_1.user_given_key
-    assert_equal "222", @key_2.user_given_key
     assert_nil @key_1.five_digit_key
     assert_nil @key_2.five_digit_key
+    @key_1.make_key("101")
+    @key_2.make_key("45678")
+    assert_equal "00101", @key_1.five_digit_key
+    assert_equal "45678", @key_2.five_digit_key
   end
 
   def test_generate_random_number
@@ -29,18 +31,7 @@ class KeyTest < Minitest::Test
     assert_equal "12345", @key_1.generate_random_key
   end
 
-  def test_that_random_or_user_key_is_chosen
-    @key_1.generate_random_key
-    @key_1.stubs(:generate_random_key).returns("56789")
-    assert_equal "56789", @key_1.determine_the_key_to_use
-    assert_equal "00222", @key_2.determine_the_key_to_use
-  end
-
-  def test_that_five_digit_key_has_key
-    @key_1.stubs(:generate_random_key).returns("56789")
-    @key_1.determine_the_key_to_use
-    @key_2.determine_the_key_to_use
-    assert_equal "56789", @key_1.five_digit_key
-    assert_equal "00222", @key_2.five_digit_key
+  def test_make_key
+    assert_equal "00222", @key_1.make_key("222")
   end
 end
