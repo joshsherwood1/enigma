@@ -3,11 +3,12 @@ require './lib/modules/decryption'
 
 class Enigma
   include Decryption
-  attr_reader :message, :shift
+  attr_reader :message, :shift, :ciphertext
 
   def initialize(shift)
     @message = nil
     @shift = shift
+    @ciphertext = nil
   end
 
   def create_character_set
@@ -120,7 +121,7 @@ class Enigma
   # end
 
   def decrypt(ciphertext, key, date)
-    @message = message
+    @ciphertext = ciphertext
     current_date = DateTime.now
     current_date_string = current_date.strftime("%d%m%y").to_s
     if date.nil? == true || date == ""
