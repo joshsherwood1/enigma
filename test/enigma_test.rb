@@ -75,8 +75,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_that_it_can_encrypt
-    expected = {:encryption=>"hello world!", :key=>"00222", :date=>"100493"}
-    expected_2 = {:encryption=>"hello world!", :key=>"00222", :date=>"280719"}
+    expected = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"100493"}
+    expected_2 = {:encryption=>"nmohuhzkxtg!", :key=>"00222", :date=>"280719"}
     assert_equal expected, @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
     assert_equal expected_2, @enigma.encrypt("hello world!", @key_2.five_digit_key, "")
   end
@@ -152,8 +152,13 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.change_d_characters_in_message
   end
 
+  def test_that_encrypted_message_is_converted_back_to_a_string
+    @enigma.encrypt("hello world!", @key_2.five_digit_key, "100493")
+    assert_equal "nmohuhzkxtg!", @enigma.convert_encrypted_array_to_string
+  end
+
   #
   # def test_that_it_can_decrypt
-  #   assert_equal "bbb", @enigma.decrypt(ciphertext, key, date)
+  #   assert_equal "bbb", @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
   # end
 end
