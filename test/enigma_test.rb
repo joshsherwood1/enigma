@@ -166,7 +166,8 @@ class EnigmaTest < Minitest::Test
   end
 
   #
-  # def test_that_it_can_decrypt
-  #   assert_equal "bbb", @enigma.decrypt("nmohuhzkxtg!", @key_2.five_digit_key, "100493")
-  # end
+  def test_that_it_can_decrypt
+    expected = {:decryption=>"hello world!", :key=>"00222", :date=>"071291"}
+    assert_equal expected, @enigma.decrypt("nmohuhzkxtg!", "00222", "071291")
+  end
 end

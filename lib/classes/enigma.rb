@@ -8,15 +8,16 @@ require 'pry'
 
 class Enigma
   include Decryption
-  attr_reader :message, :shift, :ciphertext, :encrypted_text, :key_object, :offset_object
+  attr_reader :message, :shift, :ciphertext, :encrypted_text, :key_object, :offset_object, :decrypted_text
 
   def initialize
-    @message = nil
-    @shift = Shift.new(@key_object, @offset_object)
     @ciphertext = nil
-    @encrypted_text = nil
+    @message = nil
     @key_object = Key.new
     @offset_object = Offset.new
+    @shift = Shift.new(@key_object, @offset_object)
+    @encrypted_text = nil
+    @decrypted_text = nil
   end
 
   def create_character_set
@@ -148,20 +149,32 @@ class Enigma
   #   x
   # end
 
-  def decrypt(ciphertext, key, date)
+  def decrypt(ciphertext, key, date = @offset_object.make_current_date_into_string)
     @ciphertext = ciphertext
-    current_date = DateTime.now
-    current_date_string = current_date.strftime("%d%m%y").to_s
-    if date.nil? == true || date == ""
-      chosen_date = current_date_string
-    else date.nil? == false
-      chosen_date = date
-    end
+    @key_object.make_key(key)
+    @offset_object.make_offset(date)
+    shift = Shift.new(@key_object, @offset_object)
+    make_shift_the_official_shift(shift)
+    @shift.assign_letters_to_key_digits
+    @shift.assign_letters_to_offset_digits
+    @shift.make_shift_from_key_and_offset
+    create_rotated_character_set_a_hash_for_decryption
+    create_rotated_character_set_b_hash_for_decryption
+    create_rotated_character_set_c_hash_for_decryption
+    create_rotated_character_set_d_hash_for_decryption
+    create_array_from_encrypted_message
+    change_a_characters_in_message_decryption
+    change_b_characters_in_message_decryption
+    change_c_characters_in_message_decryption
+    change_d_characters_in_message_decryption
+    convert_decrypted_array_to_string
     hash = {
-    encryption: "s",
+    decryption: convert_decrypted_array_to_string,
     key: key,
-    date: chosen_date
-  }
+    date: date
+    }
+    @decrypted_text = hash[:decryption]
+    hash
   end
 
 end
