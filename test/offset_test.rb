@@ -30,9 +30,10 @@ class OffsetTest < Minitest::Test
     assert_equal "100493", @offset_2.chosen_date
   end
 
-  def test_that_four_digit_offset_attribute_now_has_offset
-    @offset_1.stubs(:make_offset_based_off_of_current_date).returns("6961")
-    assert_equal "6961", @offset_1.make_offset_based_off_of_current_date
+  def test_method_to_make_current_date_into_string
+    @offset_1.make_current_date_into_string
+    @offset_1.stubs(:make_current_date_into_string).returns("6961")
+    assert_equal "6961", @offset_1.make_current_date_into_string
   end
 
   def test_that_offset_is_made

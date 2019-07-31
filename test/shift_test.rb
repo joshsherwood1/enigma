@@ -35,25 +35,25 @@ class ShiftTest < Minitest::Test
     assert_nil @shift_2.official_shift
   end
 
-  def test_make_shift_from_key_and_offset
-    expected = {:A=>0, :B=>10, :C=>18, :D=>24}
-    expected_2 = {:A=>50, :B=>63, :C=>104, :D=>105}
-    assert_equal expected, @shift_1.make_shift_from_key_and_offset
-    assert_equal expected_2, @shift_2.make_shift_from_key_and_offset
-  end
-
   def test_assign_letters_to_key_digits
     expected = {:A=>0, :B=>1, :C=>12, :D=>23}
     expected_2 = {:A=>45, :B=>59, :C=>99, :D=>99}
     assert_equal expected, @shift_1.assign_letters_to_key_digits
     assert_equal expected_2, @shift_2.assign_letters_to_key_digits
   end
-  #
+  
   def test_assign_letters_to_offset_digits
     expected = {:A=>0, :B=>9, :C=>6, :D=>1}
     expected_2 = {:A=>5, :B=>4, :C=>5, :D=>6}
     assert_equal expected, @shift_1.assign_letters_to_offset_digits
     assert_equal expected_2, @shift_2.assign_letters_to_offset_digits
+  end
+
+  def test_make_shift_from_key_and_offset
+    expected = {:A=>0, :B=>10, :C=>18, :D=>24}
+    expected_2 = {:A=>50, :B=>63, :C=>104, :D=>105}
+    assert_equal expected, @shift_1.make_shift_from_key_and_offset
+    assert_equal expected_2, @shift_2.make_shift_from_key_and_offset
   end
 
   def test_that_official_shift_has_shift

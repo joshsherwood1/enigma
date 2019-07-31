@@ -1,5 +1,6 @@
 require 'date'
 require './lib/modules/decryption'
+require './lib/modules/encryption'
 require './lib/classes/key'
 require './lib/classes/offset'
 require './lib/classes/shift'
@@ -7,7 +8,7 @@ require './lib/classes/enigma'
 require 'pry'
 
 class Enigma
-  include Decryption
+  include Decryption, Encryption
   attr_reader :message, :shift, :ciphertext, :encrypted_text, :key_object, :offset_object, :decrypted_text
 
   def initialize
@@ -24,157 +25,31 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
-  def make_shift_the_official_shift(shift)
+  def store_shift(shift)
     @shift = shift
   end
 
-  def create_rotated_character_set_a
-    create_character_set.rotate(@shift.official_shift[:A])
-  end
-
-  def create_rotated_character_set_b
-    create_character_set.rotate(@shift.official_shift[:B])
-  end
-
-  def create_rotated_character_set_c
-    create_character_set.rotate(@shift.official_shift[:C])
-  end
-
-  def create_rotated_character_set_d
-    create_character_set.rotate(@shift.official_shift[:D])
-  end
-
-  def create_array_from_message
-    @message.split("")
-  end
-
-  def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
-    @message = message
-    @key_object.make_key(key)
-    @offset_object.make_offset(date)
+  def make_shift
     shift = Shift.new(@key_object, @offset_object)
-    make_shift_the_official_shift(shift)
+    store_shift(shift)
     @shift.assign_letters_to_key_digits
     @shift.assign_letters_to_offset_digits
     @shift.make_shift_from_key_and_offset
-    create_rotated_character_set_a
-    create_rotated_character_set_b
-    create_rotated_character_set_c
-    create_rotated_character_set_d
-    create_array_from_message
-    create_index_hash_for_a_characters
-    change_a_characters_in_message
-    create_index_hash_for_b_characters
-    change_b_characters_in_message
-    create_index_hash_for_c_characters
-    change_c_characters_in_message
-    create_index_hash_for_d_characters
-    change_d_characters_in_message
-    convert_encrypted_array_to_string
-    hash = {
-    encryption: convert_encrypted_array_to_string,
-    key: key,
-    date: date
-    }
+  end
+
+  def encrypt(message, key = @key_object.generate_random_key, date = @offset_object.make_current_date_into_string)
+    store_message_and_make_key_and_object(message, key, date)
+    encrypt_message_with_shifts
+    hash = {encryption: convert_encrypted_array_to_string, key: @key_object.five_digit_key, date: date}
     @encrypted_text = hash[:encryption]
     hash
   end
 
-  def create_index_hash_for_a_characters
-    Hash[create_character_set.zip(create_rotated_character_set_a)]
-  end
-
-  def change_a_characters_in_message
-    create_array_from_message.map!.with_index do |letter, index|
-      if create_index_hash_for_a_characters.keys.include?(letter) == true
-        index % 4 == 0 ? create_index_hash_for_a_characters[letter] : letter
-      else create_index_hash_for_a_characters.keys.include?(letter) == false
-        index % 4 == 0 ? letter : letter
-      end
-    end
-  end
-
-  def create_index_hash_for_b_characters
-    Hash[create_character_set.zip(create_rotated_character_set_b)]
-  end
-
-  def change_b_characters_in_message
-    change_a_characters_in_message.map!.with_index do |letter, index|
-      if create_index_hash_for_b_characters.keys.include?(letter) == true
-        (index + 3) % 4 == 0 ? create_index_hash_for_b_characters[letter] : letter
-      else create_index_hash_for_b_characters.keys.include?(letter) == false
-        (index + 3) % 4 == 0 ? letter : letter
-      end
-    end
-  end
-
-  def create_index_hash_for_c_characters
-    Hash[create_character_set.zip(create_rotated_character_set_c)]
-  end
-
-  def change_c_characters_in_message
-    change_b_characters_in_message.map!.with_index do |letter, index|
-      if create_index_hash_for_c_characters.keys.include?(letter) == true
-        (index + 2) % 4 == 0 ? create_index_hash_for_c_characters[letter] : letter
-      else create_index_hash_for_c_characters.keys.include?(letter) == false
-        (index + 2) % 4 == 0 ? letter : letter
-      end
-    end
-  end
-
-  def create_index_hash_for_d_characters
-    Hash[create_character_set.zip(create_rotated_character_set_d)]
-  end
-
-  def change_d_characters_in_message
-    change_c_characters_in_message.map!.with_index do |letter, index|
-      if create_index_hash_for_d_characters.keys.include?(letter) == true
-        (index + 1) % 4 == 0 ? create_index_hash_for_d_characters[letter] : letter
-      else create_index_hash_for_d_characters.keys.include?(letter) == false
-        (index + 1) % 4 == 0 ? letter : letter
-      end
-    end
-  end
-
-  def convert_encrypted_array_to_string
-    change_d_characters_in_message.join("").to_s
-  end
-
-
-
-  # def recreate_message_with_a_characters_changed
-  #   x = create_rotated_character_set_a.group_by.each_with_index do |item, index|
-  #     index % 4
-  #   end
-  #   x
-  # end
-
   def decrypt(ciphertext, key, date = @offset_object.make_current_date_into_string)
-    @ciphertext = ciphertext
-    @key_object.make_key(key)
-    @offset_object.make_offset(date)
-    shift = Shift.new(@key_object, @offset_object)
-    make_shift_the_official_shift(shift)
-    @shift.assign_letters_to_key_digits
-    @shift.assign_letters_to_offset_digits
-    @shift.make_shift_from_key_and_offset
-    create_rotated_character_set_a_hash_for_decryption
-    create_rotated_character_set_b_hash_for_decryption
-    create_rotated_character_set_c_hash_for_decryption
-    create_rotated_character_set_d_hash_for_decryption
-    create_array_from_encrypted_message
-    change_a_characters_in_message_decryption
-    change_b_characters_in_message_decryption
-    change_c_characters_in_message_decryption
-    change_d_characters_in_message_decryption
-    convert_decrypted_array_to_string
-    hash = {
-    decryption: convert_decrypted_array_to_string,
-    key: key,
-    date: date
-    }
+    store_ciphertext_and_make_key_and_object(ciphertext, key, date)
+    decrypt_ciphertext_with_shifts
+    hash = {decryption: convert_decrypted_array_to_string, key: @key_object.five_digit_key, date: date}
     @decrypted_text = hash[:decryption]
     hash
   end
-
 end
