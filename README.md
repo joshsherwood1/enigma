@@ -2,7 +2,7 @@
 
 1. Functionality
 
-   I would give myself a 3 on functionality. The encrypt and decrypt methods both work, and the command line interface is also functions as specified in the rubric.
+   I would give myself a 3 on functionality. The encrypt and decrypt methods both work, and the command line interface also functions as specified in the rubric.
    
 
 2. Object Oriented Programming
