@@ -12,7 +12,7 @@
    
 3. Test Driven Development 
 
-   I would give myself a 4 on test driven development. I have reviewed all of the test names to make sure that they properly communicate which method or attribute they are testing. I had to use a stub to pass the key randomization generator in the key class. Also, the SimpleCov coverage is at 100%. 
+   I would give myself a 4 on test driven development. I have reviewed all of the test names to make sure that they properly communicate which method or attribute they are testing. Every method has a test. I had to use a stub to pass the key randomization generator in the key class. Also, the SimpleCov coverage is at 100%. 
    
    
 4. Version Control 
